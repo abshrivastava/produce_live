@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TVU 云导播系统</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+    <link rel="icon" href="../favicon.ico"  type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+    <link rel="stylesheet" href="../css/coupon.css?version=52">
+</head>
+<body>
+    <div style="display: none;">
+        <img src="../images/Laptop.png" alt="">
+    </div>
+    <div class="coupon">
+        <div class="gift-top clearFix">
+            <div class="gift-img left">
+                <img src="../images/balloon.png" alt="">
+            </div>
+            <div  class="gift-detail right">
+                <img class="right del-money" src="../images/del-money.png" alt="">
+                <br>
+                <img  class="right together-regist" src="../images/to-regist.png" alt="">
+            </div>
+        </div>
+        <div class="invite">
+            <p class="illustrate">
+                Hi，我正在邀请你注册TVU云导播系统，扫描下方二维码并使用我的邀请码注册，可以立减80元，赶快来注册吧~
+            </p>
+            <div class="qrimg" id="giftCode">
+            </div>
+            <p class="invite-title">我的邀请码</p>
+            <p class="invite-code">7md3</p>
+            <p class="invite-use">此邀请码也可以在网页注册时使用<br>
+             producer.tvunetworks.cn</p>
+            <div class="gift">
+                <img src="../images/gift.png" alt="">
+            </div>
+            <div class="to-pay">
+                <a>
+                    立即领取
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="../js/utils/jquery-1.11.2.min.js"></script>
+    <script src="../js/utils/qrcode.min.js"></script>
+    <script src="../js/utils/jweixin-1.0.0.js?version=6"></script>
+    <script src="../js/uncompress/weixin.js?version=6"></script>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+        var code = getQueryString("inviteCode");
+        var qrCode = new QRCode("giftCode",{
+            width: 200,
+            height: 200,
+            colorDark : '#000000',
+            colorLight : '#ffffff',
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        document.querySelector(".invite-code").innerHTML = code;
+        qrCode.makeCode(location.href);
+        var inviteCode = "register.html?inviteCode="+code;
+        document.querySelector(".to-pay a").setAttribute("href",inviteCode);
+    </script>
+</body>
+</html>

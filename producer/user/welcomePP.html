@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Producer</title>
+    <link rel="icon" href="../favicon.ico"  type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../css/common/init.css?version=45"/>
+    <link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+    <link rel="stylesheet" href="../css/register.css?version=45">
+</head>
+<body class="welcome">
+    <div class="welcome-header clearFix">
+        <div class="left">
+            <div class="logo">
+                <img src="../images/welcome-logo.png?1" alt="">
+                <span>TVU Networks</span>
+            </div>
+        </div>
+        <div class="right sign">
+            <div class="free"><a class="tryfree" href="javascript:;">Try it now</a></div>
+            <a href="javascript:;" class="register">Sign up</a>
+            <a class="login registerSign" href="javascript:;">Sign in</a>
+        </div>
+    </div>
+    <div class="t-body">
+        <div class="left">
+            <p class="title">TVU Producer</p>
+            <div class="free">
+                <a class="tryfree" href="javascript:;">Try it now</a>
+            </div>
+        </div>
+        <div class="right">
+            <img src="../images/Laptop.png" alt="">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    <script src="../js/utils/jquery.min.js"></script>
+    <script src="../js/utils/fastclick.js"></script>
+    <script src="../js/uncompress/register.js?version=46"></script>
+    <script>
+        var JsSrc =(navigator.language || navigator.browserLanguage).toLowerCase();
+        if(JsSrc.indexOf('zh')>=0){
+            $(".tryfree").html("游客");
+            $(".registerSign").html("登录");
+            $(".t-body .title").html("TVU 导播系统");
+            $(".register").html("注册");
+        }
+        $(".tryfree").on("click",function(){
+            window.location.href = "http://" + window.location.host + "/producerpro/toGuestProducer";
+        });
+    </script>
+</body>
+</html>

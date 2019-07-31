@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TVU Central Management</title>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="icon" href="./favicon.ico"  type="image/x-icon" />
+	<link rel="shortcut icon" href="../favicon.ico"  type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../js/utils/datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/support.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/producerRecharge.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/producerUpdate.css"/>
+</head>
+<body>
+	<div class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navbar-header col-sm-6 col-xs-10">
+                    <a class="navbar-brand" href="#">
+                        <img alt="TVU Logo" class="logo-icon" src="../images/logo_pageIcon.png">
+                    </a>
+                    <span class="nav-text">Producer Management</span>
+                </div>
+                
+                <div class="col-sm-6 col-xs-2 log-content text-right">
+                    <div class="logout hidden-xs right">
+                        <a class="logout-btn" onclick="logout();" href="javascript:;">LOGOUT</a>
+                    </div>
+                    <div class="user-info right">
+                        <span class="glyphicon glyphicon-user user-icon dropdown-toggle" data-toggle="dropdown">
+                            <span class="show-user caret hidden-lg hidden-md hidden-sm"></span>
+                        </span>
+                        
+                        <span class="show-name hidden-xs" id="userName"></span>
+                        <ul class="dropdown-menu logout-menu">
+                          <li><a href="logout" onclick="logout();">LogOut</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default">
+		 <div class="container-fluid">
+		 	<div class="navbar-header">
+              <button type="button" id="collapse" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+		 </div>
+		 <div class="collapse navbar-collapse" id="navbar">
+		 	<ul class="nav navbar-nav">
+		 		<li><a class="tab-btn" id="ServerList" href="">Server List</a></li>
+		 		<li><a class="tab-btn" id="userList" href="">User List</a></li>
+		 		<li><a class="tab-btn" id="Image" href="">Image</a></li>	
+		 		<li><a class="tab-btn tab-active" href="javascript:;">Update</a></li>	
+		 	</ul>
+		 </div>
+	</nav>
+	<div class="operate">
+		<div class="search-content container-fluid server">
+			<div class="row">
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="search-box">
+						<div class="dropdown left change-option">
+							<button class="btn btn-default dropdown-toggle full-width" type="button" id="searchOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Name
+						   		<span class="caret"></span>
+						  	</button>
+						</div>
+
+					    <div class="input-group">
+					        <input type="text" class="form-control" id="filterText" placeholder="" onkeydown="searchServerList(event, this);">
+					        <span class="input-group-btn">
+					       		<button class="btn btn-default glyphicon glyphicon-search" type="button" id="searchBtn"></button>
+					        </span>
+					    </div>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-3 col-xs-12 addImg">
+	                <button type="button" class="btn add-btn" data-toggle="modal" data-target="#addVersionModal">Add</button>
+	            </div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid main-content server" >
+		<div class="table-responsive table-hover">
+			<table class="table" id="runningTable">
+				<thead>
+					<th>Num</th>
+					<th>Name</th>
+					<th>Environment</th>
+					<th>Added Time</th>
+					<th>Operation</th>
+				</thead>
+		   		<tbody class="main-tbody" id="UpdateBody">
+		   			<tr>
+		   				<td>---</td>
+		   				<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+		   			</tr>
+		   		</tbody>
+		  	</table>
+		  <!-- 1 -->
+		</div>
+		<div class="row hide" id="pageRow">
+			<div class="jump-page col-sm-12 text-right" id="paging">
+				<span class="page-btn">
+			    	<input type="text" class="page-input" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="3" value="1">
+			      	<a href="javascript:;" class="forward-icon glyphicon glyphicon-share-alt" onclick="paging('gopaging')"></a>
+			    </span>
+				
+				<div class="dropdown right">
+				  	<button class="btn dropdown-toggle" type="button" id="pageList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    <span class="every-page">10</span>
+				    <span class="caret"></span>
+				 	 </button>
+				  	<ul class="dropdown-menu" id="pageOption" aria-labelledby="pageList">
+						<li><a href="javascript:;">10</a></li>
+					    <li><a href="javascript:;">20</a></li>
+					    <li><a href="javascript:;">50</a></li>
+					    <li><a href="javascript:;">100</a></li>
+					</ul>
+				</div>
+
+				<span class="page-icon page-last right glyphicon glyphicon-step-forward" onclick="paging('lastpage')"></span>
+				<span class="page-icon page-next right glyphicon glyphicon-triangle-right" onclick="paging('nextpage')"></span>
+				
+				<span class="right page-num-area"><span class="current-page">1</span>/<span class="total-page">1</span></span>
+				
+				<span class="page-icon page-prve right glyphicon glyphicon-triangle-left" onclick="paging('prvepage')"></span>
+				<span class="page-icon page-first right glyphicon glyphicon-step-backward" onclick="paging('firstpage')"></span>
+			</div>
+		</div>
+		<!-- addVersion -->
+		<div class="modal fade bs-example-modal-sm" id="addVersionModal" tabindex="-1" role="dialog">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content" id="addVersionContent">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title">Add a update</h4>
+			      </div>
+			      <div class="modal-body">
+			        <div class="form-group">
+					    <label for="assignName" class="UpdateTimeTitle">Update time</label>
+					    <div class="input-group input-border updateDate">
+						    <input type="text" class="form-control add-date" readonly">
+					    </div>
+						<label for="assignName" class="UpdateTitle">Update description (COM)</label>
+						<div class="updateCom">
+							<textarea name="" id="" cols="30" rows="10" class="updateContent"></textarea>
+						</div>
+						<label for="assignName" class="UpdateTitle">Update description (CN)</label>
+						<div class="updateCn">
+							<textarea name="" id="" cols="30" rows="10" class="updateContent"></textarea>
+						</div>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-success" id="addUpdateDone" onclick="saveAddVersion()" data-dismiss="modal">Done</button>
+			      </div>
+			    </div>
+		 	</div>
+		</div>
+
+		<!-- EditVersion -->
+		<div class="modal fade bs-example-modal-sm" id="EditVersionModal" tabindex="-1" role="dialog">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title">Add a update</h4>
+			      </div>
+			      <div class="modal-body">
+			        <div class="form-group">
+					    <label for="assignName" class="UpdateTimeTitle">Update time</label>
+					    <div class="input-group input-border updateDate">
+						    <input type="text" class="form-control add-date" readonly">
+					    </div>
+						<label for="assignName" class="UpdateTitle">Update description</label>
+						<div class="updateMessage">
+							<textarea name="" id="" cols="30" rows="10" class="updateContent"></textarea>
+						</div>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-success" id="EditUpdateDone" onclick="EditVersion()" data-dismiss="modal">Done</button>
+			      </div>
+			    </div>
+		 	</div>
+		</div>
+
+		<div class="modal" id="errorModal" tabindex="-1" role="dialog">
+	  	<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Warning</h4>
+		      	</div>
+		     	<div class="modal-body">
+		        	<p id="errorInfo" class="text-center"></p>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+		      	</div>
+		    </div>
+	  	</div>
+	</div>
+
+	</div>
+	<script src="../js/utils/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/utils/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="../js/utils/fn.oUtils.js?7"></script>
+	<script type="text/javascript" src="../js/utils/jquery.nicescroll.min.js?7"></script>
+	<script type="text/javascript" src="../js/supportCommon.js?7"></script>
+	<script type="text/javascript" src="../js/producerUpdate.js?7"></script>	
+</body>
+</html>

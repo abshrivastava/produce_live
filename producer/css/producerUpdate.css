@@ -1,0 +1,19 @@
+.UpdateTimeTitle{
+	font-size: 16px;
+}
+.updateDate{
+	width:288px;
+	height:34px;
+	border-radius:4px;
+	border:1px solid rgba(217,217,217,1);
+}
+.UpdateTitle{
+	font-size: 16px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+.updateContent{
+	resize: none;
+	width:555px;
+	background:rgba(255,255,255,1);
+}

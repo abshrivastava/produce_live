@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/*Reset the initial style ---Start*/
+html, body,span,p,a,img,ul, li,h1,label,input,form,table,td,tr{	margin: 0;padding: 0;border: 0;font: inherit;vertical-align: baseline;}
+table {border-collapse: collapse;cellspacing: 0;}
+a {outline: none;color: #fff;}
+a:active,a:focus {outline: none;}
+input {outline: none}
+img {max-width: 100%;}
+ul {list-style: none;}
+*,*::after,*::before {box-sizing: border-box;}
+html{font-size: 625%;}
+body{font-size: 0.1rem;}
+.w100{width:100%!important;}
+/*Reset the initial style ---End*/
+

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+	<title>TVU Producer-Promotion TVT</title>
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/tvt.css">
+	<script>
+		(function(i,s,o,g,r,a,m){
+			i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},
+				i[r].l=1*new Date();
+				a=s.createElement(o),
+		        m=s.getElementsByTagName(o)[0];
+		        a.async=1;
+		        a.src=g;m.parentNode.insertBefore(a,m)
+		})
+		(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","queryGoogleAnalyticsTrackingId",false);//true异步请求，false同步
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState==4 && xhr.status==200) {
+				var data = JSON.parse(xhr.responseText);
+				if(data.errorCode=="0x0"){
+					var result=data.result;
+					ga('create', result, 'auto');
+					ga('send', 'pageview');
+				}
+			}
+		}
+		xhr.send(null);
+	</script>
+</head>
+<body>
+	<div class="anotherHeader">
+        <div class="logo"><img src="../images/logo.png" alt=""></div>
+        <div class="header-title i18n" name="i18n_ProducerPro">TVU Producer</div>
+    </div>
+	<div  id="anotherRegister" class="parent">
+		<from class="register">
+	    	<div class="register-center">
+	    		<p class="Sign">Sign up to get <span>10 hours</span> free</p>
+	    		<div class="user email">
+	    			<span class="star left">*</span>
+		            <p name="i18n_regEmail" class="i18n">Email</p>
+		            <input type="text" >
+		            <div class="email-title"></div>
+		            <span name="i18n_sendCode" class="i18n sencode">Send Code</span>
+		        </div>
+		        <div class="user emailCode">
+		        	<span class="star left">*</span>
+		            <p name="i18n_messageCode" class="i18n">Verification Code</p>
+		            <img src="../images/promot/tip.png" alt="" class="questionMark">
+		            <input type="text" autocomplete="off">
+		            <div class="code-title"></div>
+		            <div class="questionHover">
+		            	<p>Click the Send Code button to receive</p>
+		            	<p>your Verification Code by email.</p>
+		            </div>
+		        </div>
+		         <div class="user password">
+		        	<span class="star left">*</span>
+		            <p class="i18n" name="i18n_password">Password</p>
+		            <input type="password" autocomplete="off">
+		            <div class="password-title"></div>
+	       		</div>
+	       		<div class="user name">
+	       			<div class="firstName left">
+	       				<span class="star left">*</span>
+		    			<p>First Name</p>
+		    			<input type="text">
+		    			<div class="firstName-title"></div>
+		    		</div>
+		    		<div class="lastName left">
+		    			<span class="star left">*</span>
+		    			<p>Last Name</p>
+		    			<input type="text">
+		    			<div class="lastName-title"></div>
+		    		</div>
+	       		</div>
+	       		<div class="user country">
+	       			<span class="star left">*</span>
+	       			<p>Country</p>
+	       			<input type="text">
+	       			<div class="country-title"></div>
+	       		</div>
+	       		<div class="user company">
+	       			<span class="star left">*</span>
+	       			<p>Company Name</p>
+	       			<input type="text">
+	       			<div class="company-title"></div>
+	       		</div>
+	       		<div class="user job">
+	       			<span class="star left">*</span>
+	       			<p>Job Title</p>
+	       			<input type="text">
+	       			<div class="job-title"></div>
+	       		</div>
+	       		<div class="user phone">
+	       			<span class="star left">*</span>
+	       			<p>Phone</p>
+	       			<input type="text">
+	       			<div class="phone-title"></div>
+	       		</div>
+	       		<div class="select user">
+	       			<span class=" iconfont icon-checkbox_selected"></span>
+	       			<span>By registering, I confirm that I have read and agreed to the <a href="http://www.tvunetworks.com/company/privacy-notice">Privacy Statement</a></span>	
+	       		</div>
+	       		<div class="user user-register">
+		            <button name="i18n_signUp" class="i18n">Start my free trial</button>
+		        </div>
+	            <div class="user userSignInfo"> 
+		            <span name="i18n_alreadAccount" class="i18n"> Already got an account?</span>
+		            <span class="registerSign i18n" name="i18n_signIn"> Sign in</span> 
+	        	</div>
+	    	</div>
+		</from>
+		<div class="Tips">10 free hours is good for 30 days, offer subject to change without notice</div>
+		<div class="registration">
+			<div>
+				<p>To begin using TVU Producer,</p>
+				<p>follow these simple registration steps</p> 
+			</div>
+			<div class="steps">
+				<img src="../images/promot/email.png" alt="">
+				<p > 1. Enter your Email address</p>
+			</div>
+			<div class="steps">
+				<img src="../images/promot/click.png" alt="" >
+				<p > 2. Click the Send Code button in the Email field</p>
+			</div>
+			<div class="steps">
+				<img src="../images/promot/123.png" alt="" class="check">
+				<p> 3. Check your email for the Verification Code and</p> 
+				<p>enter the Code provided in the email</p>
+			</div>
+			<div class="steps">
+				<img src="../images/promot/book.png" alt="" class="Enter">
+				<p> 4. Enter your desired Password and fill in any other</p> 
+				<p>required fields with a red asterisk.</p>
+			</div>
+			<div class="steps">
+				<img src="../images/promot/duigou.png" alt="" class="Click">
+				<p> 5. Click the green free trial button at the</p> 
+				<p>bottom to complete the registration</p>
+			</div>
+			<div >
+				<p>You will then be prompted to login with your email</p>
+				<p> address and password to start Producer</p>
+			</div>		
+		</div>
+	</div>
+	<script src="../js/utils/jquery.min.js"></script>
+   	<script src="../js/tvt.js"></script>
+   	<script src="../js/utils/encryption.js"></script>
+</body>
+</html>

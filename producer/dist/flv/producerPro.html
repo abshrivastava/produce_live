@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+	<meta id="i18n_pagename" content="index">
+	<title>Producer</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache">
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="./flvstyle/Drag-859e2ec04a.css">
+	<link rel="stylesheet" href="./flvstyle/init-313beeb169.css">
+	<link rel="stylesheet" href="./flvstyle/class-396b0d411b.common.css">
+	<link rel="stylesheet" href="./flvstyle/css/page-35b2a46922.common.css">
+	<link rel="stylesheet" href="./flvstyle/popupAlert-2818e649d7.css">
+	<link rel="stylesheet" href="./flvstyle/animate-c6b9e3faa2.min.css">
+	<link rel="stylesheet" href="./flvstyle/producerPro-addaa55ec0.css">
+	<link rel="stylesheet" href="./flvstyle/index-37b3637c37.css">
+	<link rel="stylesheet" href="./flvstyle/spectrum-799abd7f99.css">
+</head>
+<style>
+	.stopBg {
+		background: #f00;
+		border: 1px solid #f00;
+	}
+	.stopBg:hover {
+		background: #db1a14;
+		border: 1px solid #db1a14;
+	}
+	.stopBg:active {
+		background: #CC1512;
+		border: 1px solid #CC1512;
+	}
+</style>
+<body style="position: absolute;">
+    <div class="popupContent hide" id="showDetailContent">
+		<div class="popupContent_header clearFix" style="height:100%;"></div>
+	</div>
+	<!-- isChrome start -->
+	<div class="isChrome" style="display: none">
+	  	<div class="header">
+	         <div class="logo"><img src="./images/logo.png" alt=""></div>
+	         <div class="header-title">TVU Producer</div>
+	    </div>
+	    <div class="onlyChrome">
+	      	<img src="./images/chrome_logo .png" alt="">
+	      	<p>Currently, Producer only supports <span>Google Chrome</span></p>
+	    </div>
+	</div>
+	  <!-- index页面导航栏 -->
+	<header class="clearFix header--fixed">
+		<div id="website_title" class="left clearFix">
+			<img src="images/logo_pageIcon.png" class="left" id="website_title_icon" />
+			<div class="left i18n" name="i18n_ProducerPro" id="website_title_text" title="${version}"></div>
+		</div>
+		<!-- <nav id="website_nav" class="left clearFix"></nav>  -->
+		     
+		<!--i18n languageSelectBox-->
+		<div class="lan2 i18n-language-box">
+			<select id="switchLanguage">
+				<option value="en">English</option>
+				<option value="zh">中文简体</option>
+			</select>
+		</div>
+		<!--i18n select end-->
+		<div id="hasNotReadMsgTip"></div>
+        
+		<div id="website_user" class="right clearFix">
+			<a id="userAccountMenu" class="clearFix">
+				<div class="right downArrow arrow dropdownArrow" id="userAccountIcon_arrow"></div>
+				<div id="userAccountIcon" class="right"></div>
+			</a>
+			<ul id="user_operationList" class="hide">
+				<li class="user_operationList_item">
+					<span id="user_info_name" class="ellipsis"></span>
+				</li>
+				<li class="user_operationList_item setlist">
+					<a href="producerManage" class="left ellipsis set" id="user_manager">User Management</a>	
+				</li>
+				<li class="user_operationList_item">
+					<a href="javascript:;" onclick="logout()" id="user_logout" class="left ellipsis i18n" name="i18n_logout">
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="remaining">
+			<p>Time Remaining</p>
+			<div>00:00:00</div>
+		</div>
+	</header>
+   
+	<!-- Producer Pro页面 -->
+	<div id="bgFilter" style="z-index:10;"></div>
+	<!-- loading遮罩S -->
+	<div class="loading-bg hide">
+		<span class="loading-text">Loading...</span>
+	</div>
+	<!-- purchase-loading-->
+	<div class="purchase-loading"></div>
+	<!-- recover_history-->
+	<div class="recover_history">
+		<p>Please wait, we are recovering your history data
+			<img src="./images/cloud_loading.gif" alt="">
+		</p>
+		<p>If you have any questions, please contact TVU support at: <span>Support@tvunetworks.com</span></p>
+	</div>
+	<!-- purchase-alert-->
+	<div class="purchase-alert">
+	   	<p>Sorry, please complete your subscription before using Producer</p>
+	   	<p>If you have any questions, please contact TVU support at: <span>Support@tvunetworks.com</span></p>
+	   	<div>Purchase</div>
+	</div>
+	<!-- Refueling package-->
+<!-- 	<div class="refueling-package">
+	   	<p>Sorry, you have exceeded the 10 hours included with your subscription. You can purchase an additional 10 hours usage to continue. </p>
+	   	<div>Purchase</div>
+	</div> -->
+	<!-- .purchase-promptbox-->
+	<div class="purchase-promptbox">
+		<p>Caution<img src="./images/deleteIcon.png" alt=""></p>
+	   	<p>You only have 5 minutes remaining with this session.</p>
+	   	<p>Please add additional time if you wish to continue </p>
+	   	<div>Purchase</div>
+	</div>
+	<!-- .purchase-recharge-->
+	<!-- <div class="purchase-repurchase">
+	    <p>Complete your purchase<img src="./images/deleteIcon.png" alt="" class="purchase-repurchase-close"></p>
+	   	<p>Extra time package<span>$128</span></p>
+	    <p>another <span>10</span> hours of usage for this period</p>
+	    <p>Valid time</p>
+	    <p class="deadTime"></p>
+	    <p>Payment</p>
+	    <div class="purchase-repurchase-paypal">
+	    	<img src="./images/Bitmap.png" alt="">
+            <img src="./images/Navigation Bar _ Back.png" alt="" class="gotoPaypal">
+	    </div>
+        <p class="trem">Additional terms and conditions are available
+        <span>here</span>. By purchasing the subscription, you agree to these terms and conditions.
+        </p>
+	</div>
+	<div class="rule" style="display:none;">
+            <p>TERMS AND CONDITIONS</p>
+            <p>TVU Networks does not guarantee suitability of the Producer Pro for any specific business purpose.</p>
+            <p>If during a month, you go over 10 hours of usage, you will be automatically billed another $128, for the next 10 hours.  There is no carry-over of hours you’ve paid for from month to month.</p>
+            <p>You can cancel your subscription at any time in the User Management tab of the product. Your subscription is on a monthly basis; no part-month refunds are offered at cancellation time. Cancellation means that TVU Networks will stop billing you for the product for future months. </p>
+            <p>Support for the product is email-only. The support email address is <span>Support@tvunetworks.com</span></p>
+            <div>ok</div>
+    </div>   -->
+	<!-- cancel-subscription-->
+	<!-- loading遮罩E -->
+	<!-- 主视频区域S -->
+	<div class="sd-body"> 
+		<div class="sd-main clearFix">
+			<div class="main-preview erphone left">
+			<!-- preview top-->
+				<div class="inner">
+					<div class="preview-top clearFix">
+						<div class="preview-title video-title left">
+							<span class="preview-icon video-icon"></span>
+							<span>PVW</span>
+						</div>
+						<div class="preview-voice left">
+							<span class="iconfont icon-erphone"></span>
+						</div>
+						<div class="preview-voice left clearFix voice-control" style="display: none;">
+							<span class="iconfont icon-voice left voice-control-mark"></span>
+							<div class="preview-voice-control voice-control-slider left"></div>
+						</div>
+						<div class="apply-preview right clearFix">
+						   <span class="apply-preview-title applyBtn i18n" name="i18n_applyPVW">Apply Preview</span>
+						   <span class="iconfont apply-preview-font ">
+								<span class="radius-box applyBtn">
+									<span class="switch-radius"></span>
+								</span>
+						    </span>
+						</div>
+					</div>
+					<!-- preview-source -->
+					<div class="preview-source clearFix">
+						<div class="big-video clearFix" id="preview">
+							<!-- <video  autoplay playsinline class="left main-player"></video> -->
+						</div>
+						<!-- <div class="clip" style="position:absolute;z-index:0;height:100%;left:0;top:0;width:100%;display: block;"><img src="http://10.12.32.184:8488/LocalThumbnails/25b7eff0-f12a-47f1-9729-d724f3dad468/R 2 (R Shim)/1530507652000.jpg" alt="" style="width:100%;height:100%;">
+							<img class="apply-btn hide" src="./images/replay.png">
+							<div class="video-process">
+								<div class="process-inner">
+									<div class="video-len"></div>
+									<div class="current-len">
+										<div class="video-point">
+											
+										</div>
+									</div>
+									<div class="timeCode">
+										<span class="current-time left">10.2</span>
+										<span class="total-time right">60:00</span>
+									</div>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>	
+			</div>
+			<div class="main-center">
+				<div class="inner">
+					<div class="main-swicthR clearFix" style="display: none;">
+						<span class="main-switch-title left i18n" name="i18n_Receiver">Receiver</span>
+						<div class="main-rList left" >
+							<div class="rList-show ellipsis"></div>
+							<ul class="rList-content pagehide hide"></ul>
+						</div>
+					</div>
+					<div class="progress" style="display:none;">
+						<div class="meter animate">
+							<span class="compelete" style="width: 30%"><span></span></span>
+						</div>
+						<div class="progress-status">1/3</div>
+					</div>
+
+					<div class="main-cut">
+						<div class="main-cut-btn applyPre relateRBtn i18n" name="i18n_VideoCut">Video CUT</div>
+					</div>
+					<div class="overlay-cut">
+						<div class="overlay-cut-btn i18n" name="i18n_OverlayCut">Overlay CUT</div>
+					</div>
+					<div class="afv-cut" >
+					   	<span class="afv-name i18n" name="i18n_AudioFollowVideo"></span>
+						<span class="iconfont afv-font">
+							<span class="radius-box">
+								<span class="switch-radius"></span>
+							</span>
+						</span>
+						<span class="afv-audio-cut">
+							<div class="afv-audio disabled">Audio 1</div>
+							<ul class="audio-select">
+								
+							</ul>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="main-output erphone right">
+				<div class="inner">
+					<div class="output-top clearFix">
+						<div class="output-title video-title left">
+							<span class="output-icon video-icon"></span>
+							<span>PGM</span>
+						</div>
+						<div class="output-erphone output-voice left">
+							<span class="iconfont icon-erphone"></span>
+						</div>
+						<div class="left userNum">0</div>
+						<div class="output-top-right right">
+							<!-- <div class="output-voice left clearFix voice-control" style="display: none;">
+								<span class="iconfont icon-voice left voice-control-mark"></span>
+								<div class="left voice-control-slider"></div>
+							</div> -->
+							<!-- <div class="output-mute left">
+								<span class="iconfont icon-micro hide"></span> -->
+								<!-- <span class="iconfont icon-mute"></span> -->
+							<!-- </div> -->
+							<div class="record left">
+								<span class="iconfont icon-record iconRecordBtn"></span>
+								<span class="iconfont icon-stoprecord iconStopRecordBtn hide"></span>
+							</div>
+							<div class="recordTime left">00:00:00</div>
+							<div class="output-live relateRBtn left">
+							  <span class="output-output i18n" name="i18n_OutPush">Output</span>
+							</div>
+							<div class="left shareCounts">0</div>
+							<!-- <div class="output-control left">
+								<span class="iconfont icon-control"></span>
+							</div> -->
+						</div>
+					</div>
+					<div class="output-source clearFix" style="position: relative;">
+						<div class="big-video">
+							<!-- <video  autoplay playsinline class="left main-player"></video> -->
+						</div>
+						<!-- <video width="816" height="458" class="left output-player"></video> -->
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- 主视频区域E -->
+	<div class="sd-list">
+		<!-- 预览视频列表S -->
+		<div class="sd-preview-list">
+			<div class="sd-preview-list-box">
+				<div class="preview-list-left left">
+					<div class="preview-add iconfont icon-addsource preview-list-btn"></div>
+					<!-- <div class="preview-left-arrow iconfont icon-sdleft preview-list-btn"></div> -->
+					
+					
+				</div>
+				<div class="preview-list-container">
+					<ul class="preview-content erphone clearFix"></ul>
+				</div>
+				<!-- preview list 右边的按钮，将来不用要去掉 -->
+				<!-- <div class="preview-list-right right">
+					<div class="preview-reset preview-list-btn iconfont icon-clear"></div>
+					<div class="preview-right-arrow iconfont icon-sdright preview-list-btn"></div>
+				</div> -->
+			</div>
+		</div>
+		<!-- 预览视频列表E -->
+		<!-- 视频预处理S -->
+		<div class="sd-pretreat">
+			<div class="sd-pretreat-box">
+				<div class="sd-pretreat-show clearFix">
+					<div class="sd-pretreat-container">
+						<!-- logo list -->
+						<ul class="pretreat-content show-logo clearFix" >
+							<li class="pretreat-content-add">
+								<img src="./images/loading_add_image.gif" alt="" class="addImg" >
+								<label class="operation-logo-label relateRBtn iconfont icon-add" for="file_p" style="display: inline-block;"></label>
+								<form action="#" class="hide operation-logo-from" enctype="multipart/form-data" method="post" target="hidden_frame"> 
+		           					<input type="file" id="file_p" name="upload" class="operation-uploadLogo" accept="image/png,image/gif" />
+								</form>
+							</li>
+						</ul>
+						<!-- text list start-->
+						<ul class="pretreat-content show-text clearFix hide" data-type="text">
+							<li class="pretreat-content-add">
+								<label class="operation-text-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<!-- clock list end-->
+						<ul class="pretreat-content show-clock clearFix hide" data-type="clock">
+							<li class="pretreat-content-add">
+								<label class="operation-clock-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<!-- score list-->
+						<ul class="pretreat-content show-score clearFix hide" data-type="score">
+							<li class="pretreat-content-add">
+								<label class="operation-score-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<!-- pip list-->
+						<ul class="pretreat-content show-pip clearFix hide" data-type="pip">
+							<li class="pretreat-content-add">
+								<label class="operation-pip-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<div class="pretreat-content show-clipvideo clearFix hide">
+							<div class="select-video-btns clearFix hide">
+								<div class="select-video btn left active">Video</div>
+								<div class="select-clips btn left">Clips</div>
+							</div>
+							<div class="select-seat hide">
+								<div class="clip-videos"></div>
+								<div class="select-title">
+									All recording
+								</div>
+							</div>
+							<ul class="select-single">
+								<!-- <li class="seat video-1">
+									<span class="preview-item-num">1</span>
+									<img src="./images/image.png" alt="">
+								</li>
+								<li class="seat video-2">
+									<span class="preview-item-num">2</span>
+									<img src="./images/image.png" alt="">
+								</li>
+								<li class="seat video-3">
+									<span class="preview-item-num">3</span>
+									<img src="./images/image.png" alt="">
+								</li>
+								<li class="seat video-4">
+									<span class="preview-item-num">4</span>
+									<img src="./images/image.png" alt="">
+								</li> -->
+							</ul>
+						</div>
+						<div class="sd-operation-show">
+						<!-- score -->
+						<div class="sd-score operation operation-show hide">
+							<div class="sd-operation-input">
+								<div class="leftarrow iconfont icon-sdleft left"></div>
+								<div class="score-pattern left">
+									<span class="operation-item-title i18n" name="i18n_ScorePattern" data-type="score">Score Pattern</span>
+									<ul>
+										<li>
+											<div class="operation-view-score scorepatten2" data-url="images/score_bg1.png">
+												<div class="scoreLoading hide" >
+											      <img src="images/cloud_loading.gif">
+											    </div>
+									        </div>
+									    </li>
+										<li>
+											<div class="operation-view-score scorepatten3" data-url="images/score_bg2.png">
+												<div class="scoreLoading hide" >
+											      <img src="images/cloud_loading.gif">
+											    </div>
+									        </div>
+									    </li>
+									    <li>
+											<div class="operation-view-score scorepatten4" data-url="images/score_bg3.png">
+												<div class="scoreLoading hide" >
+											      <img src="images/cloud_loading.gif">
+											    </div>
+									        </div>
+									    </li>
+									    <li>
+											<div class="operation-view-score scorepatten5" data-url="images/score_bg5.png">
+												<div class="scoreLoading hide" >
+											      <img src="images/cloud_loading.gif">
+											    </div>
+									        </div>
+									    </li>
+									</ul>
+								</div>
+								<div class="leftarrow iconfont icon-sdright left "></div>
+							</div>
+						</div>
+						<!-- text -->
+						<div class="sd-text operation operation-show hide">
+							<div class="sd-operation-input operation-item left">
+								<span class="operation-item-title i18n" name="i18n_input" data-type="text">Input</span>
+								<div class="operation-view-input">
+									<textarea name="" id="sd-textarea" cols="31" rows="25" data-bind-0="name" class="input-textarea" onpaste="javascript:return false;"  maxlength="128"></textarea>
+								</div>
+							</div>
+							<div class="sd-operation-setting left">
+								<span class="operation-item-title i18n" name="i18n_proSet">setting</span>
+								<div class="operation-view-setting">
+									<div class="sd-fontSet">
+										<span class="set-title i18n left" name="i18n_fontbg">Bg-color</span>
+										<div class="left">
+										    <input class="sd-font-input bg-input">
+										</div>	
+									</div>
+									<div class="sd-font-family">
+										<span class="set-title i18n left" name="i18n_Typeface">Typeface</span>
+										<div class="left fontFamilyDiv">
+										    <div class="sd-font-input" id="fontFamily">SimHei</div>
+											<i class="font-downArrow arrow dropdownArrow familyi"></i>
+											<ul class="family-ul disabled">
+											    <li>SimHei</li>
+												<li>sans-serif</li>
+												<li>Arial</li>
+											</ul>
+										</div>	
+									</div>
+									<div class="sd-font-color">
+									   <span class="set-title i18n left" name="i18n_fontcolor">Color</span>
+									   <input class="sd-font-input fontColor" value="FFFFFF" >
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- pip -->
+						<div class="sd-pip operation operation-show left hide">
+							<div class="pip-pat left">
+								<p class="pip-pat-font operation-item-title i18n" name="i18n_pipPattent" data-type="pip">PIP Pattern</p>
+								<div class="pip-picture">
+									<img src="./images/pip.png" alt="">
+								</div>
+							</div>
+							<div class="pip-setting left">
+								<p class="pip-pat-font i18n" name="i18n_proSet">Settings</p>
+								<div class="pip-setting-select">
+									<p class="pip-sel-font i18n" name="i18n_selectScore">Select Source</p>
+									<div class="pip-out">
+										A&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="pip-out-sel">
+											<p>1</p>
+											<ul class="pip-out-source" style="display: none">
+											</ul>
+										</div>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="iconfont voice icon-voice" style="display: none"></span>
+									</div>
+									<div class="pip-in">
+										B&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="pip-in-sel">
+											<p>1</p>
+											<ul class="pip-in-source" style="display: none">
+											</ul>
+										</div>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<span class="iconfont voice icon-novoice" style="display: none"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- clock -->
+						<div class="sd-clock operation operation-show hide">
+							<div class="sd-operation-input operation-item left">
+								<span class="operation-item-title" name="i18n_ScorePattern" data-type="clock">< Edit Timer</span>
+								<div class="clock-pattern">
+									<img src="./images/clock_pattern.png" alt="">
+								</div>
+							</div>
+							<div class="sd-operation-setting-clock left">
+								<span class="operation-clock-title i18n" name="i18n_proSet">setting</span>
+								<div class="TimeSet">
+									<span class="operation-clock-title left" name="i18n_proSet">Time</span>
+									<input type="text" class="left clockInput" value="0">
+									<span class="clockMin">Min</span>
+									<div class="clockStart left clockButton">Start</div>
+									<div class="clockStop left clockButton hide">Pause</div>
+									<div class="clockReset left clockButton">Reset</div>
+								</div>
+								<div class="defaultTime">
+									<span class="TimeOver left">Time over</span>
+									<input type="text" class="left" value="45">
+									<span class="clockMin">Min</span>
+									<span class="clockTip left">timer becomes red</span>
+									<span class="TimerApply left">Apply</span>
+								</div>	
+							</div>
+						</div>
+				    </div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="clip-dot">
+			<div class="clearFix"  style="margin-right:60px;margin-top:10px">
+				<div class="close left">
+					< Edit All Recording
+				</div>
+				<div class="so-speed clearFix right">
+					<span class="left trans-title">speed</span>
+					<div class="left sel-speed">
+					</div>
+				</div>
+				<div class="up-transferpic clearFix right">
+					<span class="left trans-title">Transition</span>
+					<label class="left pic-submit" for="file_trans">
+
+					</label>
+					<div class="pic-load left" style="display: none;">
+						<img src="./images/Spinner-1s-24px.gif" alt="">
+					</div>
+					<form action="#" class="hide operation-logo-from" enctype="multipart/form-data" method="post" target="hidden_frame"> 
+	           			<input type="file" id="file_trans" name="upload" class="operation-uploadLogo" accept="image/png" />
+					</form>
+				</div>
+			</div>
+			<ul class="time-axis clearFix">
+				<li>-60</li>
+				<li>-50</li>
+				<li>-40</li>
+				<li>-30</li>
+				<li>-20</li>
+				<li>-10<span class="right">0 SEC</span></li>
+			</ul>
+			<ul class="clip-source">
+				<li class="source clearFix">
+					<div class="checkbox iconfont icon-check"></div>
+					<div class="source-pic clearFix">
+						<div class="pic">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+							<img src="./images/image.png" alt="">
+						</div>
+						<div class="clip-slider" data-starttime="1529393468000">
+							<div class="left handle">
+								<span class="iconfont icon-handle"></span>
+							</div>
+							<div class="right handle">
+								<span class="iconfont icon-handle"></span>
+							</div>
+						</div>
+						<div class="mark">
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 底部overlay tab栏 start -->
+	<div class="overlay-tab">
+		<div class="operation-type-btns operation-btns clearFix">
+			<div class="operation-logo relateRBtn operation-type-btn hover-bg op-label active iconfont icon-logo"></div>
+			<div class="operation-score relateRBtn operation-type-btn hover-bg op-label iconfont icon-score"></div>
+			<div class="operation-text relateRBtn operation-type-btn hover-bg op-label iconfont icon-text"></div>
+			<div class="operation-pip relateRBtn operation-type-btn hover-bg op-label iconfont icon-pip" ></div>
+			<div class="operation-clip hide relateRBtn operation-type-btn hover-bg op-label iconfont icon-clipvideo" ></div>
+			<div class="operation-clock relateRBtn operation-type-btn hover-bg op-label iconfont icon-Timer hide" ></div>
+		</div>
+	</div>
+	<!-- 底部overly tab栏 end -->
+	  <!-- 视频推流start -->
+	<div class="pushing hide">
+		<div class="push-head">
+		    <div class="websiteFilter"></div>
+		</div>
+		<div class="Push_toAccount_comment">
+			<div class="gridShow"><img src="./images/gridLogo.png" alt="" /><div class="gridShow-title">Grid</div></div>
+			<div class="emptyPush">
+			    <div class="empty_box"><img src="images/empty_box.png" alt=""></div>
+			    <span class="emptyData i18n" name="i18n_EmptyData">Empty Data</span>
+			</div>	
+		</div>
+		<div class="push-foot" >
+		    <div class="checkAllBtn left push-checkbox">
+		      <div class="dropdown_option checkbox SelectAllBtn">
+		        <a href="javascript:;" class="ellipsis dropdown_option_item itsBg"></a>			
+		      </div>
+		    </div>
+		    <a href="javascript:;" class="push-live pushBtn btns i18n" name="i18n_share">Live</a>
+			<a href="javascript:;" class="push-stop pushBtn btns i18n hide" name="i18n_stop">Stop</a>
+			<div class="right platfromAccount">
+				<div class="account addCount"><i class="iconfont icon-add"></i></div>
+				<div class="account deleteCount"><i class="iconfont icon-del"></i></div>
+			</div>
+		</div>
+		<div class="loading i18n" name="i18n_loading"></div>
+	</div>
+	<div id="oUtils_noAuthorityBg" class="hide">
+			<div id="noAuthorityBg"></div>
+			<div id="noAuthorityTip" class="i18n" name="i18n_noauthorized"><!--Please contact support to purchase this feature,then you can monitor and make VOIP to any device.--></div>
+	</div>
+
+	<!-- upload video start-->
+	<div class="upload-video" style="display: none">
+		 <div class="upload-header clearFix">
+		 	<ul class="upload-tab left">
+			 	<li class="pack active">TVU Anywhere</li>
+			 	<li class="local i18n" name="i18n_localVideo">Local Videos</li>
+			 	<li class="ip i18n" name="i18n_extIP">EXT IP Source</li>
+			 	<li class="tvuPack">TVU Pack</li>
+			</ul>
+			<div class="close right"><i class="iconfont icon-vedio-close left"></i></div>
+		 </div>
+		 <!--tvu AnyWhere -->
+		 <div class="upload-body">
+		 	<div class="video-manage pack" >
+		 		<div class="pack-container">
+		 			<div class="anywher-title"></div>
+			 		<div class="qr-img" id="qrImg"></div>
+			 		<div class="tips"></div>	
+		 		</div>
+		 		<div class="sd-token-title"></div>
+			 	<div class="pack-body">	
+			 		<div class="tokenLoad">
+			 			<img src="./images/cloud_loading.gif" alt="Loading...">	
+			 		</div>
+			 	</div>
+		 	</div>
+		 	<!-- localVideo -->
+		 	<div class="video-manage local" style="display: none;">
+		 		<div class="video-title">
+		 			<div class="file left i18n" name="i18n_fileName">File Name</div>
+		 			<!-- <div class="operate left">Operation</div> -->
+		 		</div>
+		 		<div class="video-body">
+		 		</div>
+		 		<label class="video-add add" for="file_v">
+		 			<i class="iconfont icon-add" ></i>
+		 		</label>
+		 		<form  id="formVideo" name="FileShim"  enctype="multipart/form-data" method="post" target="hidden_frame">
+					<input type="file" id="file_v" name="FileShim" title="Select local video" accept=".ts,.rm,.rmvb,.wmv,.wtv,.avi,.3gp,.mkv,.mpg,video/mpeg,video/mp4" onchange="uploadVideo(this)">
+				</form>
+		 	</div>
+		 	<!-- ext score -->
+		 	<div class="video-manage ip" style="display:none">
+		 		<div class="video-title">
+		 			<div class="file left i18n" name="i18n_fileName">File Name</div>
+		 			<div class="operate left i18n" name="i18n_Operation">Operation</div>
+		 		</div>
+		 		<div class="ip-add add" style="margin-bottom: 15px;">
+		 			<i class="iconfont icon-add" ></i>
+		 		</div>
+		 		<div class="ip-body">
+		 			<!-- <div class="ip-info clearFix" data-filename="1511491519209x (IP Shim)">
+		 				<div class="ip-address left">
+		 					<input type="text"  placeholder="rtmp/rtsp/hls">
+		 				</div>
+		 				<div class="ip-operate left">Live</div>
+		 				<div class="ip-del left"><i class="iconfont icon-del"></i></div>
+		 			</div> -->
+		 		</div>
+		 	</div>
+		 	<!-- tvu pack -->
+		 	<div class="video-manage tvupack" style="display:none">
+		 		<div class="packtitle">Pack ID</div>
+		 		<div class="tvuPackInfo" style="display: none;">
+		 			<input type="text" placeholder="Please input 16 digit PID">
+		 		</div>
+		 		<div class="pairBtn" style="display: none;">Pair</div>
+		 		<div class="device" style="position: relative;">
+		 			<div class="file left i18n" name="i18n_Device"></div>
+	                <div class="Camera left i18n" name="i18n_Camera" style="position: absolute;left: 377px;"></div>
+	                <div class="operate right i18n" name="i18n_Operation" style="width:105px;"></div>
+		 		</div>
+		 		<div class="tvupack-body">	
+			 	</div>
+		 	</div>
+		 </div>
+		 <div class="upload-footer clearFix">
+		 	<div class="complete-btn right i18n" name="i18n_OK">OK</div>
+		 </div>
+	</div>
+	<form id="detailPush" class="popupContent pushCount" style="z-index:10;display:none;">
+		<div class="popupContent_title i18n" name="i18n_editShareSource"></div>
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_content">
+			<div class="popup_item resolution">
+	            <div class="popup_item_text nickName i18n" name="i18n_resolution"></div>
+	            <div class="popup_item_value resolutionTypeList"></div>
+	    	</div>
+	    	<div class="popup_item bitrate">
+	            <div class="popup_item_text nickName i18n" name="i18n_VBitrate"></div>
+	            <div class="popup_item_value BitrateTypeList" contenteditable></div>
+	    	</div>
+	    	<div class="dividingLine"></div>
+			<div class="popup_item">
+	            <div class="popup_item_text nickName i18n" name="i18n_OutputName"></div>
+	            <input type="text" autocomplete="off" class="popup_item_value push-nickname trimItem" maxlength="32" readonly="true" />
+	    	</div>
+	    	<div class="popup_item panda-auth panda-item shareItem">
+				<div class="popup_item_text i18n" name="i18n_account"></div>
+				<div class="panda-login">
+	             	<a href="javascript:;" class="inline_block btns i18n black_greenBtn panda-auth-btn" name="i18n_authenticate"></a>
+				</div>
+				<div class="panda-nickname hide">
+					<input type="text" autocomplete="off" readonly class="popup_item_value trimItem panda-nickname-text" maxlength="255"/>
+				</div>
+			</div>
+	    	<div class="popup_item push-title">
+                <div class="popup_item_text i18n" name="i18n_VideoTitle"></div>
+                <input type="text" autocomplete="off" class="popup_item_value trimItem" maxlength="45">
+            </div>
+	    	<div class="detail-info">
+
+		    </div> 
+	    </div>
+    	<div class="popupContent_footer middle">
+	      	<div class="inline-blocks">
+	      		<div style="display: inline-block;">
+	      			<input class="btns greenBtn popupOperationBtn pushDetailbtn i18n-input" selectname="i18n_publish"/>
+	      			<span class="btns greenBtn popupOperationBtn loading  hide"><img src="./images/switch.gif" alt=""></span>	
+	      		</div>
+	          	<input type="button" value="Cancel" class="btns grayBtn popupOperationBtn i18n-input cancel addExtSource_cancelAdd" selectname="i18n_cancel"/>
+	      	</div>
+	    </div>
+	</form>
+	<form id="addShareSource" class="popupContent pushCount" style="z-index:10;display:none;" autocomplete="off">
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title i18n" name="i18n_socialAccount"></div>
+		<div class="popupContent_content">
+			<div class="popup_item">
+	              <div class="popup_item_text i18n" name="i18n_OutputName"></div>
+	              <input type="text" autocomplete="off" class="popup_item_value trimItem push-nickname" maxlength="32"/>
+	    	</div>
+			<div class="popup_item">
+	            <div class="popup_item_text i18n" name="i18n_websiteType"></div>
+	            <div class="popup_item_value" id="addExtSource_sourceTypeList"></div>
+			</div>
+			<div class="detail-info">
+				
+			</div>
+			<div class="popup_item panda-auth panda-item shareItem">
+				<div class="popup_item_text i18n" name="i18n_account"></div>
+				<div class="panda-login">
+	             	<a href="javascript:;" class="inline_block btns i18n black_greenBtn panda-auth-btn" name="i18n_authenticate"></a>
+				</div>
+				<div class="panda-nickname hide">
+					<input type="text" autocomplete="off" readonly class="popup_item_value trimItem panda-nickname-text" maxlength="255"/>
+				</div>
+			</div>
+		</div>
+		<div class="popupContent_footer middle">
+	      	<div class="inline-blocks">
+	      		<div style="display: inline-block;">
+	      			<input type="button" class="btns greenBtn popupOperationBtn add-count i18n-input" selectname="i18n_save"/>
+	      			<!-- <button class="btns greenBtn popupOperationBtn loading  hide"><img src="./images/switch.gif" alt=""></button> -->	
+	      		</div>
+	          	<input type="button" value="Cancel" class="btns grayBtn popupOperationBtn i18n-input cancel addExtSource_cancelAdd" selectname="i18n_cancel"/>
+	      	</div>
+	    </div>
+	</form>
+	<form id="girdUrlShow" class="popupContent" style="z-index:10;display:none;" autocomplete="off">
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title i18n" name="i18n_GridSource"></div>
+		<div class="popupContent_content">
+			<img src="./images/cloud_loading.gif" alt="">
+			<div>
+				<input type="text" class="gridIssp left" readonly="true">
+	      	    <p class="left">Copy</p> 
+			</div>
+	      	<div class="copyTips">Please input the url on receiver.</div> 	
+	    </div>
+	</form>
+	<form id="RecordPGM" class="popupContent" style="z-index:10;display:none;" autocomplete="off">
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title i18n" name="i18n_GridSource"></div>
+		<div class="popupContent_content">
+			<div class="popup_item resolution">
+	            <div class="popup_item_text nickName i18n" name="i18n_resolution">Resolution</div>
+	            <div type="text" class="popup_item_value resolutionTypeList"></div>
+	    	</div>
+	    	<div class="popup_item bitrate">
+	            <div class="popup_item_text nickName i18n" name="i18n_VBitrate"></div>
+	            <div type="text" class="popup_item_value BitrateTypeList" contenteditable></div>
+	    	</div>
+	    	<div class="record-view" style="font-size: 13px;">The records will be kept in 24 hours, please download them soon. 
+	    		<span>View history</span>
+	    	</div>
+	    </div>
+	    <div class="popupContent_footer middle">
+	      	<div class="inline-blocks" style="margin-top: 16px;">
+	          	<input type="button" value="Record" class="btns greenBtn popupOperationBtn recordBtn" select />
+	      	</div>
+	    </div>
+	</form>
+	<!-- upload video end -->
+	<!-- hidden element -->
+	<input type="hidden" name="user_role" id="user_role" />
+	<input id="app_Id" type="hidden"/>
+	<input id="userBehavior" type="hidden"/>
+</body>
+<script src="./flvscript/jquery-a694ed547f.min.js"></script>
+<script src="./flvscript/helpers-f626b597c4.min.js"></script>
+<script src="./flvscript/spectrum-256b98356f.js"></script>
+<script src="./flvscript/placeholder-6eb6a1e169.js"></script>
+<script src="./flvscript/i18n_switchLanguage-705c9c8079.min.js"></script>
+<script src="./flvscript/jquery-9ff17fb97e.i18n.properties.min.js"></script>
+<script src="./flvscript/fn-0ccd65d3fa.oUtils.min.js"></script>
+<script src="./flvscript/in18_trans-3ced3e1c11.js"></script>
+<script src="./flvscript/demo-1d38916c64.js"></script>
+<script src="./flvscript/jquery-27e81a3f7b.nicescroll.min.js"></script>
+<script src="./flvscript/fn-47097cff05.array.min.js"></script>
+<script src="./flvscript/fn-ff0af99a91.loadPage.min.js"></script>
+<script src="./flvscript/headroom-68093d440e.min.js"></script>
+<script src="./flvscript/jquery-3155bc32a3.headroom.min.js"></script>
+<script src="./flvscript/jquery-ui-1d2f936195.min.js"></script>
+<script src="./flvscript/jquery-fff2e1720f.fn.common.min.js"></script>
+<script src="./flvscript/aes-c38f0c8021.min.js"></script>
+<script src="./flvscript/common-fb7c5eb965.js"></script>
+<script src="./flvscript/index-cefde7d92e.js"></script>
+<script src="./flvscript/socket-c0bbb14cef.io.min.js"></script>
+<script src="./flvscript/pushRender-bea01d5e38.js"></script>
+<script src="./flvscript/pushEvent-df4bbff47d.js"></script>
+<script src="./flvscript/producerPro-b16793d03e.js"></script>
+<script src="./flvscript/dragChange-0fe8a2ffd3.js"></script>
+<script src="./flvscript/wp-7e3d2d84a3.min.js"></script>
+<script src="./flvscript/clipDot-faa645dfd6.js"></script>
+<script src="./flvscript/qrcode-517b55d368.min.js"></script>
+<script src="./flvscript/Drag-2646641230.min.js"></script>
+<script src="./flvscript/dragAndDrop-ca94aef853.min.js"></script>
+
+</html>

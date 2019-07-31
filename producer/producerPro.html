@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+	<meta id="i18n_pagename" content="index">
+	<title>TVU Producer-Home</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache">
+	<script>
+    	var ua = navigator.userAgent.toLowerCase();
+	    var isWeixin = ua.indexOf('micromessenger') != -1;
+	    if (isWeixin) {
+        	var paras = document.location.search;
+			if(paras != null && paras.indexOf("session=") > 0) {
+				var indexSession = paras.indexOf("session=");
+				sessionId = paras.substring(indexSession + "session=".length);
+			}
+			var checkConfigUrl = "checkConfig?session="+sessionId;
+			var ajax = new XMLHttpRequest();
+            // 第二步： 设置状态监听函数
+            ajax.onreadystatechange = function(){
+                // 第五步：在监听函数中，判断readyState=4 && status=200表示请求成功
+                if(ajax.readyState==4 && ajax.status==200){
+                    // 第六步： 使用responseText、responseXML接受响应数据，并使用原生JS操作DOM进行显示
+                    var data = JSON.parse(ajax.responseText);
+                    var parentInviteCode = data.USER_NAME.parentInviteCode;
+                    var amount =  data.USER_NAME.parentInviteCode.amount;
+		            localStorage.setItem("parentInviteCode",parentInviteCode); 
+		            localStorage.setItem("amount",amount); 
+		            var redirectUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx45d068a8d2341c1d&redirect_uri=http://" + window.location.host + "/producerpro/redirectWechat4Openid&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+     				window.location.href=redirectUrl;   
+                }
+            }
+            // 第三步： open一个链接
+            ajax.open("GET",checkConfigUrl,false);//true异步请求，false同步
+            
+            // 第四步： send一个请求。 可以发送对象和字符串，不需要传递数据发送null
+            ajax.send(null);
+        }
+
+        (function(i,s,o,g,r,a,m){
+			i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},
+				i[r].l=1*new Date();
+				a=s.createElement(o),
+		        m=s.getElementsByTagName(o)[0];
+		        a.async=1;
+		        a.src=g;m.parentNode.insertBefore(a,m)
+		})
+		(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","queryGoogleAnalyticsTrackingId",false);//true异步请求，false同步
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState==4 && xhr.status==200) {
+				var data = JSON.parse(xhr.responseText);
+				if(data.errorCode=="0x0"){
+					var result=data.result;
+					ga('create', result, 'auto');
+					ga('send', 'pageview');
+				}
+			}
+		}
+		xhr.send(null);    
+	</script>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<!-- build:css ./style/Drag.css -->
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">	
+	<link rel="stylesheet" type="text/css" href="./asset/drag-master/Drag.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/init.css -->
+	<link rel="stylesheet" type="text/css" href="./css/common/init.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/class.common.css -->
+	<link rel="stylesheet" type="text/css" href="./css/common/class.common.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/css/page.common.css -->
+	<link rel="stylesheet" type="text/css" href="./css/common/page.common.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/popupAlert.css -->
+	<link rel="stylesheet" type="text/css" href="./css/popupAlert.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/animate.min.css -->
+	<link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/register.css -->
+	<link rel="stylesheet" type="text/css" href="./css/register.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/producerPro.css -->
+	<link rel="stylesheet" type="text/css" href="./css/producerPro.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/index.css -->
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<!-- endbuild -->
+	<!-- build:css ./style/spectrum.css -->
+	<link rel="stylesheet" href="./js/utils/bgrins-spectrum/spectrum.css">
+	<!-- endbuild -->	
+	<link rel="stylesheet" type="text/css" href="./js/utils/datetimepicker/css/bootstrap-datetimepicker.css"/>
+	<script src="https://app.singular.live/libs/singularplayer/0.1.2/singularplayer.js"></script>
+</head>
+<style>
+	.stopBg {
+		background: #f00;
+		border: 1px solid #f00;
+	}
+	.stopBg:hover {
+		background: #db1a14;
+		border: 1px solid #db1a14;
+	}
+	.stopBg:active {
+		background: #CC1512;
+		border: 1px solid #CC1512;
+	}
+</style>
+<body style="position: absolute;">
+    <div class="popupContent hide" id="showDetailContent">
+		<div class="popupContent_header clearFix" style="height:100%;"></div>
+	</div>
+	  <!-- index页面导航栏 -->
+	<header class="clearFix header--fixed">
+		<div id="website_title" class="left clearFix">
+			<img src="images/logo_pageIcon.png" class="left" id="website_title_icon" />
+			<div class="left i18n" name="i18n_ProducerPro" id="website_title_text"></div>
+		</div>
+		<!-- <nav id="website_nav" class="left clearFix"></nav>  -->
+		     
+		<div id="hasNotReadMsgTip"></div>
+        
+		<div class="not-visitor">
+			<div id="website_user" class="right clearFix">
+				<a id="userAccountMenu" class="clearFix">
+					<div class="right downArrow arrow dropdownArrow" id="userAccountIcon_arrow"></div>
+					<div id="userAccountIcon" class="right"></div>
+				</a>
+				<ul id="user_operationList" class="hide">
+					<li class="user_operationList_item">
+						<span id="user_info_name" class="ellipsis left"></span>
+						<div class="right"><sapn class="businessType"></sapn></div>	
+					</li>
+					<li class="user_operationList_item clearFix center setlist">
+						<p class="ellipsis set i18n" id="user_manager" name="i18n_UserManagement">User Management</p>
+						<!-- <p class="shareHasGift">分享有礼</p> -->
+					</li>
+					<li class="user_operationList_item center">
+						<div class="i18n-language" id="changeLan">
+							<div class="left language i18n" name="i18n_languageTrans">Language</div>
+							<ul class="right">
+								<li class="" data-id="en">En</li>
+								<li class=""  data-id="zh">中文</li>
+							</ul>
+						</div>
+					</li>
+					<li class="user_operationList_item center">
+						<p class="ellipsis" id="user_tutorial">
+							<a href="" target="_blank" class="i18n" name="i18n_tutorial"></a>
+						</p>
+					</li>
+					<li class="user_operationList_item center updatelist">
+						<p class="ellipsis i18n" id="user_update" name="i18n_Updates">Updates</p>
+					</li>
+					<li class="user_operationList_item">
+						<a href="javascript:;" onclick="logout()" id="user_logout" class="left ellipsis i18n" name="i18n_logout">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="vertical-line"></div>
+			<div class="Expiration-Date right">
+				<p class="i18n" name="i18n_Expiration">Expiration Date</p>
+				<div>0000/00/00</div>
+			</div>
+			<div class="vertical-line"></div>
+			<div class="charge"><button class="i18n" name="i18n_Purchase">购买</button></div>
+			<div class="remaining right">
+				<p class="i18n" name="i18n_RemainingTime">Time Remaining</p>
+				<div>00h 00min</div>
+			</div>
+			
+		</div>
+		<div class="visitor right clearFix" style="display: none;">
+			<div class="login-btn i18n" name="i18n_signIn">登录</div>
+			<div class="register-btn i18n" name="i18n_signUp">注册</div>
+		</div>
+	</header>
+   
+	<!-- Producer Pro页面 -->
+	<div id="bgFilter" style="z-index:2000;"></div>
+	<!-- loading遮罩S -->
+	<div class="loading-bg hide">
+		<span class="loading-text">Loading...</span>
+	</div>
+	<!-- purchase-loading-->
+	<div class="purchase-loading"></div>
+	<div class="pp-loading">
+		<div class="progress">
+			<div class="meter animate">
+				<span class="compelete" style="width: 30%"><span></span></span>
+			</div>
+			<div class="progress-status">0%</div>
+			<p>Loading…</p>
+		</div>
+	</div>
+	<!-- recover_history-->
+	<div class="recover_history">
+		<p class="i18n historyContent" name="i18n_RecoverHistory"></p>
+		<img src="./images/cloud_loading.gif" alt="">
+		<p class="i18n" name="i18n_SupportQuestion">If you have any questions, please contact TVU support at:</p>
+		<p>Support@tvunetworks.com</p>
+	</div>
+	<!-- purchase-alert-->
+	<div class="purchase-alert">
+	   	<p  class="i18n" name="i18n_CompleteSubscription">Sorry, please complete your subscription before using Producer</p>
+	   	<p class="i18n" name="i18n_SupportQuestion">If you have any questions, please contact TVU support at: </p>
+	   	<p>Support@tvunetworks.com</p>
+	   	<div class="i18n" name="i18n_Purchase">Purchase</div>
+	</div>	
+	<!-- .purchase-promptbox-->
+	<div class="purchase-promptbox">
+		<img src="./images/deleteIcon.png" alt="">
+		<p class="i18n" name="i18n_Caution">Caution</p>
+	   	<p class="i18n" name="i18n_remaining">You only have 5 minutes remaining with this session.</p>
+	   	<p class="i18n" name="i18n_additional">Please add additional time if you wish to continue </p>
+	   	<div class="i18n" name="i18n_Purchase">Purchase</div>
+	</div>
+
+	<!-- Refueling package-->
+	<div class="refueling-package">
+	   	<p class="i18n" name="i18n_TimeNull">Sorry, you have exceeded the 10 hours included with your subscription. You can purchase an additional 10 hours usage to continue. </p>
+	   	<div class="i18n" name="i18n_Purchase">Purchase</div>
+	</div>
+
+	<!-- Refueling package-->
+	<div class="updateVersion popupContent" >
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title">Updates</div>
+		<div class="updateBody">
+			<ul></ul>		
+		</div>	
+		<div class="page">
+            <div class="pre-page left"></div>
+            <div class="page-content left"><span class="currentpage">2</span>/<span class="totalpage">5</span></div>
+            <div class="next-page right"></div>
+    	</div>
+	</div>
+	<!-- cancel-subscription-->
+	<!-- loading遮罩E -->
+	<!-- 主视频区域S -->
+	<div class="sd-body"> 
+		<div class="sd-main clearFix">
+			<div class="main-preview erphone left">
+			<!-- preview top-->
+				<div class="inner">
+					<div class="preview-top clearFix">
+						<div class="preview-title video-title left">
+							<span class="preview-icon video-icon"></span>
+							<span>PVW</span>
+						</div>
+						<div class="preview-voice left">
+							<span class="iconfont icon-erphone"></span>
+						</div>
+						<div class="preview-voice left clearFix voice-control" style="display: none;">
+							<span class="iconfont icon-voice left voice-control-mark"></span>
+							<div class="preview-voice-control voice-control-slider left"></div>
+						</div>
+						<div class="apply-preview right clearFix">
+						   <span class="apply-preview-title applyBtn i18n" name="i18n_applyPVW">Apply Preview</span>
+						   	<span class="iconfont apply-preview-font ">
+								<span class="radius-box applyBtn">
+									<span class="switch-radius"></span>
+								</span>
+						    </span>
+						</div>
+					</div>
+					<!-- preview-source -->
+					<div class="preview-source clearFix">
+						<iframe id="pvwSingularPlayer" style='width:100%;height:100%;position:absolute;left:0;top:0;border: solid 1px black;z-index: 3;' src="https://app.singular.live/singularplayer/client"></iframe>
+						<div class="big-video clearFix" id="preview">
+							<!-- <video  autoplay playsinline class="left main-player"></video> -->
+						</div>
+						<!-- <div class="clip" style="position:absolute;z-index:0;height:100%;left:0;top:0;width:100%;display: block;"><img src="http://10.12.32.184:8488/LocalThumbnails/25b7eff0-f12a-47f1-9729-d724f3dad468/R 2 (R Shim)/1530507652000.jpg" alt="" style="width:100%;height:100%;">
+							<img class="apply-btn hide" src="./images/replay.png">
+							<div class="video-process">
+								<div class="process-inner">
+									<div class="video-len"></div>
+									<div class="current-len">
+										<div class="video-point">
+											
+										</div>
+									</div>
+									<div class="timeCode">
+										<span class="current-time left">10.2</span>
+										<span class="total-time right">60:00</span>
+									</div>
+								</div>
+							</div>
+						</div> -->
+					</div>
+				</div>	
+			</div>
+			<div class="main-center">
+				<div class="inner">
+					<div class="main-swicthR clearFix" style="display: none;">
+						<span class="main-switch-title left i18n" name="i18n_Receiver">Receiver</span>
+						<div class="main-rList left" >
+							<div class="rList-show ellipsis"></div>
+							<ul class="rList-content pagehide hide"></ul>
+						</div>
+					</div>
+					<div class="main-cut">
+						<div class="main-cut-btn applyPre relateRBtn i18n" name="i18n_VideoCut">Video CUT</div>
+					</div>
+					<div class="overlay-cut">
+						<div class="overlay-cut-btn i18n" name="i18n_OverlayCut">Overlay CUT</div>
+					</div>
+					<div class="afv-cut" >
+					   	<span class="afv-name i18n" name="i18n_AudioFollowVideo"></span>
+						<span class="iconfont afv-font">
+							<span class="radius-box">
+								<span class="switch-radius"></span>
+							</span>
+						</span>
+						<span class="afv-audio-cut">
+							<div class="afv-audio disabled">Audio 1</div>
+							<ul class="audio-select">
+								
+							</ul>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="main-output erphone right">
+				<div class="inner">
+					<div class="output-top clearFix">
+						<div class="output-title video-title left">
+							<span class="output-icon video-icon"></span>
+							<span>PGM</span>
+						</div>
+						<div class="output-erphone output-voice left">
+							<span class="iconfont icon-erphone"></span>
+						</div>
+						<div class="left userNum">0</div>
+						<div class="output-top-right right">
+							<!-- <div class="output-voice left clearFix voice-control" style="display: none;">
+								<span class="iconfont icon-voice left voice-control-mark"></span>
+								<div class="left voice-control-slider"></div>
+							</div> -->
+							<!-- <div class="output-mute left">
+								<span class="iconfont icon-micro hide"></span> -->
+								<!-- <span class="iconfont icon-mute"></span> -->
+							<!-- </div> -->
+							<div class="record left">
+								<span class="iconfont icon-record iconRecordBtn"></span>
+								<span class="iconfont icon-stoprecord iconStopRecordBtn hide"></span>
+							</div>
+							<div class="recordTime left">00:00:00</div>
+							<div class="output-live relateRBtn left">
+							  <span class="output-output i18n" name="i18n_OutPush">Output</span>
+							  <!-- 视频推流start -->
+								<div class="pushing hide">
+									<div class="push-head">
+									    <div class="websiteFilter"></div>
+									</div>
+									<div class="Push_toAccount_comment">
+										<div class="emptyPush">
+										    <div class="empty_box"><img src="images/empty_box.png" alt=""></div>
+										    <span class="emptyData i18n" name="i18n_EmptyData">Empty Data</span>
+										</div>
+									</div>
+									<div class="push-foot" >
+										<div class="pushAlertTips">
+											<div class="left iconfont icon-tishi"></div>
+											<div class="i18n" name="i18n_pushDefault">Default support 1 CDN, add one terminal +1 Hour time consumption</div>
+										</div>
+									    <div class="checkAllBtn left push-checkbox">
+									      <div class="dropdown_option checkbox SelectAllBtn">
+									        <a href="javascript:;" class="ellipsis dropdown_option_item itsBg"></a>			
+									      </div>
+									    </div>
+									    <a href="javascript:;" class="push-live pushBtn btns i18n" name="i18n_share">Live</a>
+										<a href="javascript:;" class="push-stop pushBtn btns i18n hide" name="i18n_stop">Stop</a>
+										<div class="right platfromAccount">
+											<div class="account addCount"><i class="iconfont icon-add"></i></div>
+											<div class="account deleteCount"><i class="iconfont icon-del"></i></div>
+										</div>
+									</div>
+									<div class="loading i18n" name="i18n_loading"></div>
+								</div>
+							</div>
+							<div class="left shareCounts">0</div>
+							<!-- <div class="output-control left">
+								<span class="iconfont icon-control"></span>
+							</div> -->
+						</div>
+					</div>
+					<div class="output-source clearFix" style="position: relative;">
+						<iframe id="SingularPlayer" style='width:100%;height:100%;position:absolute;left:0;top:0;border: solid 1px black;' src="https://app.singular.live/singularplayer/client?interactive=1"></iframe>
+						<div class="big-video">
+							<!-- <video  autoplay playsinline class="left main-player"></video> -->
+						</div>
+						<!-- <video width="816" height="458" class="left output-player"></video> -->
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- 主视频区域E -->
+	<div class="sd-list">
+		<!-- 预览视频列表S -->
+		<div class="sd-preview-list">
+			<div class="sd-preview-list-box">
+				<div class="preview-list-left left">
+					<div class="preview-add iconfont icon-addsource preview-list-btn"></div>
+					<!-- <div class="preview-left-arrow iconfont icon-sdleft preview-list-btn"></div> -->	
+				</div>
+				<div class="preview-list-container">
+					<ul class="preview-content erphone clearFix"></ul>
+				</div>
+				<!-- preview list 右边的按钮，将来不用要去掉 -->
+				<!-- <div class="preview-list-right right">
+					<div class="preview-reset preview-list-btn iconfont icon-clear"></div>
+					<div class="preview-right-arrow iconfont icon-sdright preview-list-btn"></div>
+				</div> -->
+			</div>
+		</div>
+		<!-- 预览视频列表E -->
+		<!-- 底部overlay tab栏 start -->
+		<div class="overlay-tab">
+			<div class="operation-type-btns operation-btns clearFix">
+				<div class="operation-logo relateRBtn operation-type-btn hover-bg op-label active"><div class="tab-in"><i class="iconfont icon-logo"></i> <span class="i18n" name="i18n_overlayLogo"></span></div></div>
+				<div class="left boder"></div>
+				<div class="operation-text relateRBtn operation-type-btn hover-bg op-label"><div class="tab-in"><i class="iconfont icon-text"></i> <span class="i18n" name="i18n_overlayText"></span></div></div>
+				<div class="left boder"></div>
+				<div class="operation-pip relateRBtn operation-type-btn hover-bg op-label" ><div class="tab-in"><i class="iconfont icon-pip"></i> <span class="i18n" name="i18n_overlayPip"></span></div></div>
+				<div class="left boder"></div>
+				<div class="operation-score relateRBtn operation-type-btn hover-bg op-label"><div class="tab-in"><i class="iconfont icon-score"></i> <span class="i18n" name="i18n_overlayScore"></span></div></div>
+				<div class="left boder"></div>
+				<div class="operation-clip relateRBtn operation-type-btn hover-bg op-label" ><div class="tab-in"><i class="iconfont icon-clipvideo"></i> <span class="i18n" name="i18n_overlayReplay"></span></div></div>
+				<div class="left boder"></div>
+				<div class="operation-clock relateRBtn operation-type-btn hover-bg op-label" ><div class="tab-in"><i class="iconfont icon-Timer"></i> <span class="i18n" name="i18n_overlayClock"></span></div></div>
+				<div class="left boder"></div>
+				<div class="operation-singular relateRBtn operation-type-btn hover-bg op-label" ><div class="tab-in"><i class="iconfont icon-singular"></i> <span class='i18n' name="i18n_overlaySingular"'></span></div></div>
+			</div>
+			<div class="editSingular hide">
+				<div class="eidtheader clearFix"><div class="left">Inspector</div><div class="right colse iconfont icon-colse"></div></div>
+				<ul class="singular-complist">
+					<li><span class="txt-title">title</span><input type="text" value="1234"></li>
+					<li><span class="txt-title">title</span><input type="text" value="1234"></li>
+				</ul>
+				<div class="footer"><button>save</button></div>
+			</div>
+		</div>
+		<!-- 底部overly tab栏 end -->
+		<!-- 视频预处理S -->
+		<div class="sd-pretreat">
+			<div class="sd-pretreat-box">
+				<div class="sd-pretreat-show clearFix">
+				<!-- Project Settings -->
+					<div class="projectSet right hide">
+						<p>Project Settings</p>
+						<p class="formatTitle left">Video Format</p>
+						<div class="select-format right"></div>
+					</div>
+					<div class="sd-pretreat-container">
+						<!-- logo list -->
+						<ul class="pretreat-content show-logo clearFix" >
+							<li class="pretreat-content-add">
+								<img src="./images/loading_add_image.gif" alt="" class="addImg" >
+								<label class="operation-logo-label relateRBtn iconfont icon-add" for="file_p" style="display: inline-block;"></label>
+								<form action="#" class="hide operation-logo-from" enctype="multipart/form-data" method="post" target="hidden_frame"> 
+		           					<input type="file" id="file_p" name="upload" class="operation-uploadLogo" accept="image/png,image/gif,image/jpg,image/jpeg" />
+								</form>
+							</li>
+						</ul>
+						<!-- text list start-->
+						<ul class="pretreat-content show-text clearFix hide" data-type="text">
+							<li class="pretreat-content-add">
+								<label class="operation-text-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<!-- clock list end-->
+						<ul class="pretreat-content show-clock clearFix hide" data-type="clock">
+							<li class="pretreat-content-add">
+								<label class="operation-clock-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<!-- singular list end-->
+						<div class="pretreat-content show-singular clearFix hide" data-type="singular">
+							<ul class="singular-list clearFix">
+								<li class="pretreat-content-add">
+									<a class="operation-singular-label relateRBtn" style="display: inline-block;" href="https://app.singular.live/users/login" target="__blank">
+										<div class="iconfont icon-add"></div>
+										<p>Visit Singular.Live to add shows</p>
+									</a>
+								</li>
+							</ul>
+							<div class="auth-singular hide">
+								<p class="singular-tips">Please sign in your singular.live account here, to ingest the created graphic.</p>
+								<p class="auth"><button>Authorize</button></p>
+							</div>
+						</div>
+						<!-- score list-->
+						<ul class="pretreat-content show-score clearFix hide" data-type="score">
+							<li class="pretreat-content-add">
+								<label class="operation-score-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<!-- pip list-->
+						<ul class="pretreat-content show-pip clearFix hide" data-type="pip">
+							<li class="pretreat-content-add">
+								<label class="operation-pip-label relateRBtn iconfont icon-add" style="display: inline-block;"></label>
+							</li>
+						</ul>
+						<div class="pretreat-content show-clipvideo clearFix hide">
+							<div class="select-video-btns clearFix hide">
+								<div class="select-video btn left active">Video</div>
+								<div class="select-clips btn left">Clips</div>
+							</div>
+							<div class="select-seat hide">
+								<div class="clip-videos"></div>
+								<div class="select-title">
+									All recording
+								</div>
+							</div>
+							<ul class="select-single">
+								<!-- <li class="seat video-1">
+									<span class="preview-item-num">1</span>
+									<img src="./images/image.png" alt="">
+								</li>
+								<li class="seat video-2">
+									<span class="preview-item-num">2</span>
+									<img src="./images/image.png" alt="">
+								</li>
+								<li class="seat video-3">
+									<span class="preview-item-num">3</span>
+									<img src="./images/image.png" alt="">
+								</li>
+								<li class="seat video-4">
+									<span class="preview-item-num">4</span>
+									<img src="./images/image.png" alt="">
+								</li> -->
+							</ul>
+						</div>
+						<div class="sd-operation-show">
+							<!-- score -->
+							<div class="sd-score operation operation-show hide">
+								<div class="sd-operation-input">
+									<div class="leftarrow iconfont icon-sdleft left"></div>
+									<div class="score-pattern left">
+										<span class="operation-item-title i18n" name="i18n_EditBack" data-type="score">Score Pattern</span>
+										<ul>
+											<li>
+												<div class="operation-view-score scorepatten2" data-url="images/score_bg1.png">
+													<div class="scoreLoading hide" >
+												      <img src="images/cloud_loading.gif">
+												    </div>
+										        </div>
+										    </li>
+											<li>
+												<div class="operation-view-score scorepatten3" data-url="images/score_bg2.png">
+													<div class="scoreLoading hide" >
+												      <img src="images/cloud_loading.gif">
+												    </div>
+										        </div>
+										    </li>
+										    <li>
+												<div class="operation-view-score scorepatten4" data-url="images/score_bg3.png">
+													<div class="scoreLoading hide" >
+												      <img src="images/cloud_loading.gif">
+												    </div>
+										        </div>
+										    </li>
+										    <li>
+												<div class="operation-view-score scorepatten5" data-url="images/score_bg5.png">
+													<div class="scoreLoading hide" >
+												      <img src="images/cloud_loading.gif">
+												    </div>
+										        </div>
+										    </li>
+										</ul>
+									</div>
+									<div class="leftarrow iconfont icon-sdright left "></div>
+								</div>
+							</div>
+							<!-- text -->
+							<div class="sd-text operation operation-show hide">
+								<div class="sd-operation-input operation-item left">
+									<span class="operation-item-title i18n" name="i18n_EditBack" data-type="text">Input</span>
+									<div class="operation-view-input">
+										<textarea name="" id="sd-textarea" cols="31" rows="25" data-bind-0="name" class="input-textarea" onpaste="javascript:return false;"  maxlength="128"></textarea>
+									</div>
+								</div>
+								<div class="sd-operation-setting left">
+									<span class="operation-item-title i18n" name="i18n_proSet">setting</span>
+									<div class="operation-view-setting">
+										<div class="sd-fontSet">
+											<span class="set-title i18n left" name="i18n_fontbg">Bg-color</span>
+											<div class="left">
+											    <input class="sd-font-input bg-input">
+											</div>	
+										</div>
+										<div class="sd-font-family">
+											<span class="set-title i18n left" name="i18n_Typeface">Typeface</span>
+											<div class="left fontFamilyDiv">
+											    <div class="sd-font-input" id="fontFamily">SimHei</div>
+												<i class="font-downArrow arrow dropdownArrow familyi"></i>
+												<ul class="family-ul disabled">
+												    <li>SimHei</li>
+													<li>sans-serif</li>
+													<li>Arial</li>
+													<li>Proxima Nova Rg</li>
+													<li>Proxima Nova Con...</li>
+												</ul>
+											</div>	
+										</div>
+										<div class="sd-font-color">
+										   <span class="set-title i18n left" name="i18n_fontcolor">Color</span>
+										   <input class="sd-font-input fontColor" value="FFFFFF" >
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- pip -->
+							<div class="sd-pip operation operation-show left hide">
+								<div class="pip-pat left">
+									<p class="pip-pat-font operation-item-title i18n" name="i18n_EditBack" data-type="pip">PIP Pattern</p>
+									<div class="pip-picture">
+										<img src="./images/pip.png" alt="">
+									</div>
+								</div>
+								<div class="pip-setting left">
+									<p class="pip-pat-font i18n" name="i18n_proSet">Settings</p>
+									<div class="pip-setting-select">
+										<p class="pip-sel-font i18n" name="i18n_selectScore">Select Source</p>
+										<div class="pip-out">
+											A&nbsp;&nbsp;&nbsp;&nbsp;
+											<div class="pip-out-sel">
+												<p>1</p>
+												<ul class="pip-out-source" style="display: none">
+												</ul>
+											</div>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<span class="iconfont voice icon-voice" style="display: none"></span>
+										</div>
+										<div class="pip-in">
+											B&nbsp;&nbsp;&nbsp;&nbsp;
+											<div class="pip-in-sel">
+												<p>1</p>
+												<ul class="pip-in-source" style="display: none">
+												</ul>
+											</div>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<span class="iconfont voice icon-novoice" style="display: none"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- clock -->
+							<div class="sd-clock operation operation-show hide">
+								<div class="sd-operation-input operation-item left">
+									<span class="operation-item-title i18n" name="i18n_EditBack" data-type="clock">< Edit Timer</span>
+									<div class="clock-pattern">
+										<img src="./images/clock_pattern.png" alt="">
+									</div>
+								</div>
+								<div class="sd-operation-setting-clock left">
+									<span class="operation-clock-title i18n" name="i18n_proSet">setting</span>
+									<div class="TimeSet">
+										<span class="operation-clock-title left i18n" name="i18n_time">Time</span>
+										<input type="text" class="left clockInput" value="0">
+										<span class="clockMin i18n" name="i18n_min">Min</span>
+										<div class="clockStart left clockButton i18n" name="i18n_timeStart">Start</div>
+										<div class="clockStop left clockButton hide i18n" name="i18n_Pause">Pause</div>
+										<div class="clockReset left clockButton i18n" name="i18n_Reset">Reset</div>
+									</div>
+									<div class="defaultTime">
+										<span class="TimeOver left i18n" name="i18n_overTime">Time over</span>
+										<input type="text" class="left" value="45">
+										<span class="clockMin i18n" name="i18n_min">Min</span>
+										<span class="clockTip left i18n" name="i18n_timeToRed">timer becomes red</span>
+										<span class="TimerApply left i18n" name="i18n_Apply">Apply</span>
+									</div>	
+								</div>
+							</div>
+							<!-- singular -->
+							<div class="sd-singular operation operation-show hide">
+								<div class="sd-operation-input">
+									<span class="operation-item-title" data-type="singular">< Edit Singular.live</span>
+									<ul class="operation-view-singular">
+										
+									</ul>
+								</div>
+								<!-- <div class="setting-singular left">
+									<p class="operation-singular-button">Done</p>
+								</div> -->
+							</div>
+				   		</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clip-dot">
+			<div class="clearFix"  style="margin-right:60px;margin-top:10px">
+				<div class="close left i18n" name="i18n_EditBack">
+					< Edit All Recording
+				</div>
+				<div class="so-speed clearFix right">
+					<span class="left trans-title i18n" name="i18n_speed">speed</span>
+					<div class="left sel-speed">
+					</div>
+				</div>
+				<div class="up-transferpic clearFix right">
+					<span class="left trans-title i18n" name="i18n_Transition">Transition</span>
+					<label class="left pic-submit" for="file_trans">
+
+					</label>
+					<div class="pic-load left" style="display: none;">
+						<img src="./images/Spinner-1s-24px.gif" alt="">
+					</div>
+					<form action="#" class="hide operation-logo-from" enctype="multipart/form-data" method="post" target="hidden_frame"> 
+	           			<input type="file" id="file_trans" name="upload" class="operation-uploadLogo" accept="image/png" />
+					</form>
+				</div>
+			</div>
+			<ul class="time-axis clearFix">
+				<li>-60</li>
+				<li>-50</li>
+				<li>-40</li>
+				<li>-30</li>
+				<li>-20</li>
+				<li>-10<span class="right">0 SEC</span></li>
+			</ul>
+			<ul class="clip-source">
+				<li class="source clearFix">
+					<div class="checkbox iconfont icon-check"></div>
+					<div class="source-pic clearFix">
+						<div class="pic">
+							<!-- <img src="./images/image.png" alt=""> -->
+							
+						</div>
+						<div class="clip-slider" data-starttime="1529393468000">
+							<div class="left handle">
+								<span class="iconfont icon-handle"></span>
+							</div>
+							<div class="right handle">
+								<span class="iconfont icon-handle"></span>
+							</div>
+						</div>
+						<div class="mark">
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- upload video start-->
+	<div class="upload-video" style="display: none">
+		 <div class="upload-header clearFix">
+		 	<ul class="upload-tab left">
+			 	<li class="pack active">TVU Anywhere</li>
+			 	<li class="local i18n" name="i18n_localVideo">Local Videos</li>
+			 	<li class="ip i18n" name="i18n_extIP">EXT IP Source</li>
+			 	<li class="tvuPack">TVU Pack</li>
+			 	<li class="grid">Grid</li>
+			 	<!-- <li class="quad-view">QuadView</li> -->
+			</ul>
+			<div class="close right"><i class="iconfont icon-vedio-close left"></i></div>
+		 </div>
+		 <!--tvu AnyWhere -->
+		 <div class="upload-body">
+		 	<div class="video-manage pack" >
+		 		<div class="pack-container">
+		 			<div class="anywher-title"></div>
+			 		<div class="qr-img" id="qrImg"></div>
+			 		<div class="tips"></div>	
+		 		</div>
+		 		<div class="sd-token-title"></div>
+			 	<div class="pack-body">	
+			 		<div class="tokenLoad">
+			 			<img src="./images/cloud_loading.gif" alt="Loading...">	
+			 		</div>
+			 	</div>
+		 	</div>
+		 	<!-- localVideo -->
+		 	<div class="video-manage local" style="display: none;">
+		 		<div class="video-title">
+		 			<div class="file left i18n" name="i18n_fileName">File Name</div>
+		 			<!-- <div class="operate left">Operation</div> -->
+		 		</div>
+		 		<div class="video-body">
+		 		</div>
+		 		<label class="video-add add" for="file_v">
+		 			<i class="iconfont icon-add" ></i>
+		 		</label>
+		 		<form  id="formVideo" name="FileShim"  enctype="multipart/form-data" method="post" target="hidden_frame">
+					<input type="file" id="file_v" name="FileShim" title="Select local video" accept=".ts,.rm,.rmvb,.wmv,.wtv,.avi,.3gp,.mkv,.mpg,video/mpeg,video/mp4" onchange="resourceAbout.uploadVideo(this)">
+				</form>
+		 	</div>
+		 	<!-- ext score -->
+		 	<div class="video-manage ip" style="display:none">
+		 		<div class="video-title">
+		 			<div class="file left i18n" name="i18n_fileName">File Name</div>
+		 			<div class="operate left i18n" name="i18n_Operation">Operation</div>
+		 		</div>
+		 		<div class="ip-add add" style="margin-bottom: 15px;">
+		 			<i class="iconfont icon-add" ></i>
+		 		</div>
+		 		<div class="ip-body">
+		 			<!-- <div class="ip-info clearFix" data-filename="1511491519209x (IP Shim)">
+		 				<div class="ip-address left">
+		 					<input type="text"  placeholder="rtmp/rtsp/hls">
+		 				</div>
+		 				<div class="ip-operate left">Live</div>
+		 				<div class="ip-del left"><i class="iconfont icon-del"></i></div>
+		 			</div> -->
+		 		</div>
+		 	</div>
+		 	<!-- tvu pack -->
+		 	<div class="video-manage tvupack" style="display:none">
+		 		<div class="packtitle">Pack ID</div>
+		 		<!-- <div class="tvuPackInfo" style="display: none;">
+		 			<input type="text" placeholder="Please input 16 digit PID">
+		 		</div>
+		 		<div class="pairBtn" style="display: none;">Pair</div> -->
+		 		<div class="device" style="position: relative;">
+		 			<div class="file left i18n" name="i18n_Device"></div>
+	                <div class="Camera left i18n" name="i18n_Camera" style="position: absolute;left: 377px;"></div>
+	                <div class="operate right i18n" name="i18n_Operation" style="width:105px;"></div>
+		 		</div>
+		 		<div class="tvupack-body">	
+			 	</div>
+		 	</div>
+		 	<div class="video-manage grid" style="display:none">
+		 		<div class="search">
+		 			<input type="text" placeholder="Search">
+		 			<i class="iconfont icon-search"></i>
+		 		</div>
+		 		<div class="video-title">
+		 			<div class="file left i18n" name="i18n_gridName">Grid Name</div>
+		 			<div class="sort_pos left">A/Z<span class="iconfont icon-sortup"></span></div>
+		 			<div class="operate right i18n" name="i18n_Operation">Operation</div>
+		 		</div>
+		 		<div class="grid-body" style="padding-bottom:100px;">
+		 			<!-- <div class="grid-info clearFix" data-id="1511491519209x (IP Shim)">
+		 				<div class="grid-address left">
+		 					<input type="text" readonly=true placeholder="rtmp/rtsp/hls">
+		 				</div>
+		 				<div class="left select"></div>
+		 				<div class="grid-operate left">connect</div>
+		 				<div class="grid-loading" style="display: none;"><img src="./images/loading.png" alt=""></div>
+		 			</div> -->
+		 		</div>
+		 	</div>
+		 	<div class="video-manage quad-list" style="display:none">
+		 		<div class="video-title">
+		 			<div class="file left i18n" name="i18n_fileName">File Name</div>
+		 			<!-- <div class="left camera-idx">Camera Number</div> -->
+		 			<div class="operate left i18n" name="i18n_Operation">Operation</div>
+		 		</div>
+		 		<div class="quad-add add" style="margin-bottom: 15px;display: none;">
+		 			<i class="iconfont icon-add" ></i>
+		 		</div>
+		 		<div class="quad-body">
+		 			
+		 		</div>
+		 	</div>
+		 </div>
+		 <div class="upload-footer clearFix">
+		 	<div class="complete-btn right i18n" name="i18n_OK">OK</div>
+		 </div>
+	</div>
+	<form id="detailPush" class="popupContent pushCount" style="display:none;">
+		<div class="popupContent_title i18n" name="i18n_editShareSource"></div>
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_content">
+			<div class="popup_item resolution">
+	            <div class="popup_item_text nickName i18n" name="i18n_resolution"></div>
+	            <div class="popup_item_value resolutionTypeList"></div>
+	    	</div>
+	    	<div class="popup_item bitrate">
+	            <div class="popup_item_text nickName i18n" name="i18n_Bitrate"></div>
+	            <div class="popup_item_value BitrateTypeList"></div>
+	    	</div>
+	    	<div class="dividingLine"></div>
+			<div class="popup_item">
+	            <div class="popup_item_text nickName i18n" name="i18n_OutputName"></div>
+	            <input type="text" autocomplete="off" class="popup_item_value push-nickname trimItem" maxlength="32" readonly="true" />
+	    	</div>
+	    	<div class="popup_item panda-auth panda-item shareItem">
+				<div class="popup_item_text i18n" name="i18n_account"></div>
+				<div class="panda-login">
+	             	<a href="javascript:;" class="inline_block btns i18n black_greenBtn panda-auth-btn" name="i18n_authenticate"></a>
+				</div>
+				<div class="panda-nickname hide">
+					<input type="text" autocomplete="off" readonly class="popup_item_value trimItem panda-nickname-text" maxlength="255"/>
+				</div>
+			</div>
+	    	<div class="popup_item push-title">
+                <div class="popup_item_text i18n" name="i18n_VideoTitle"></div>
+                <input type="text" autocomplete="off" class="popup_item_value trimItem" maxlength="45">
+            </div>
+	    	<div class="detail-info">
+
+		    </div> 
+	    </div>
+    	<div class="popupContent_footer middle">
+	      	<div class="inline-blocks">
+	      		<div style="display: inline-block;">
+	      			<input class="btns greenBtn popupOperationBtn pushDetailbtn i18n-input" selectname="i18n_publish" readonly="true" />
+	      			<span class="btns greenBtn popupOperationBtn loading  hide"><img src="./images/switch.gif" alt=""></span>	
+	      		</div>
+	          	<input type="button" value="Cancel" class="btns grayBtn popupOperationBtn i18n-input cancel addExtSource_cancelAdd" selectname="i18n_cancel"/>
+	      	</div>
+	    </div>
+	</form>
+	<form id="addShareSource" class="popupContent pushCount" style="display:none;" autocomplete="off">
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title i18n" name="i18n_socialAccount"></div>
+		<div class="popupContent_content">
+			<div class="popup_item">
+	              <div class="popup_item_text i18n" name="i18n_OutputName"></div>
+	              <input type="text" autocomplete="off" class="popup_item_value trimItem push-nickname" maxlength="32"/>
+	    	</div>
+			<div class="popup_item">
+	            <div class="popup_item_text i18n" name="i18n_websiteType"></div>
+	            <div class="popup_item_value" id="addExtSource_sourceTypeList"></div>
+			</div>
+			<div class="detail-info">
+				
+			</div>
+			<div class="popup_item panda-auth panda-item shareItem">
+				<div class="popup_item_text i18n" name="i18n_account"></div>
+				<div class="panda-login">
+	             	<a href="javascript:;" class="inline_block btns i18n black_greenBtn panda-auth-btn" name="i18n_authenticate"></a>
+				</div>
+				<div class="panda-nickname hide">
+					<input type="text" autocomplete="off" readonly class="popup_item_value trimItem panda-nickname-text" maxlength="255"/>
+				</div>
+			</div>
+		</div>
+		<div class="popupContent_footer middle">
+	      	<div class="inline-blocks">
+	      		<div style="display: inline-block;">
+	      			<input type="button" class="btns greenBtn popupOperationBtn add-count i18n-input" selectname="i18n_save"/>
+	      			<!-- <button class="btns greenBtn popupOperationBtn loading  hide"><img src="./images/switch.gif" alt=""></button> -->	
+	      		</div>
+	          	<input type="button" value="Cancel" class="btns grayBtn popupOperationBtn i18n-input cancel addExtSource_cancelAdd" selectname="i18n_cancel"/>
+	      	</div>
+	    </div>
+	</form>
+	<form id="girdUrlShow" class="popupContent" style="display:none;" autocomplete="off">
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title i18n" name="i18n_GridSource"></div>
+		<div class="popupContent_content">
+			<img src="./images/cloud_loading.gif" alt="">
+			<div>
+				<input type="text" class="gridIssp left" readonly="true">
+	      	    <p class="left i18n" name="i18n_copy">Copy</p> 
+			</div>
+	      	<div class="copyTips i18n" name="i18n_inputUrl">Please input the url on receiver.</div> 	
+	    </div>
+	</form>
+	<form id="RecordPGM" class="popupContent" style="display:none;" autocomplete="off">
+		<a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+		<div class="popupContent_title i18n" name="i18n_record"></div>
+		<div class="popupContent_content">
+			<div class="popup_item resolution">
+	            <div class="popup_item_text nickName i18n" name="i18n_resolution">Resolution</div>
+	            <div type="text" class="popup_item_value resolutionTypeList"></div>
+	    	</div>
+	    	<div class="popup_item bitrate">
+	            <div class="popup_item_text nickName i18n" name="i18n_Bitrate"></div>
+	            <div type="text" class="popup_item_value BitrateTypeList"></div>
+	    	</div>
+	    	<div class="record-view" style="font-size: 13px;">
+	    		<span class="i18n" name="i18n_Recordkept">The records will be kept in 24 hours, please download them soon.</span>
+	    	    <a href="producerManage.html" target="_blank" class="i18n" name="i18n_viewHistory">view history</a>	 
+	    	</div>
+	    </div>
+	    <div class="popupContent_footer middle">
+	      	<div class="inline-blocks" style="margin-top: 16px;">
+	      		<p class="btns greenBtn popupOperationBtn recordBtn i18n" name="i18n_record"></p>
+	          	<!-- <input type="button"  class="btns greenBtn popupOperationBtn recordBtn i18n"  select name="i18n_record"  /> -->
+	      	</div>
+	    </div>
+	</form>
+	<div class="quad-edit hide">
+		<div class="quad-head">
+			<div class="left">Edit QuadView</div>
+			<div class="right iconfont icon-vedio-close"></div>
+		</div>
+		<div class="quad-body clearFix">
+			<div class="left v-view">
+				<!-- <li class="v-group"> -->
+					<div class="v-pic">
+						<img src="" alt="">
+					</div>
+					<div class="operate-pos"><input type="text" class="edit-text" readonly value="Please input your text here"></div>
+				<!-- </li> -->
+				<!-- <li class="v-group"> -->
+					<div class="v-pic">
+						<img src="" alt="">
+					</div>
+					<div class="operate-pos"><input type="text" class="edit-text" readonly value="Please input your text here"></div>
+				<!-- </li> -->
+				<li class="v-group">
+					<div class="v-pic">
+						<img src="" alt="">
+					</div>
+					<div class="operate-pos"><input type="text" class="edit-text" readonly value="Please input your text here"></div>
+				</li>
+				<!-- <li class="v-group"> -->
+					<div class="v-pic">
+						<img src="" alt="">
+					</div>
+					<div class="operate-pos"><input type="text" class="edit-text" readonly value="Please input your text here"></div>
+				<!-- </li> -->
+			</div>
+			<div class="right v-edit">
+				<div class="pre-pos">
+					<img src="./images/quad_view.png" alt="">
+				</div>
+				<div class="sel-posandpic">
+					<ul class="sel-pos">
+						<li class="clearFix cra-pos">
+							<div class="left title">A</div>
+							<div class="right pos"></div>
+						</li>
+						<li class="clearFix cra-pos">
+							<div class="left title">B</div>
+							<div class="right pos"></div>
+						</li>
+						<li class="clearFix cra-pos">
+							<div class="left title">C</div>
+							<div class="right pos"></div>
+						</li>
+						<li class="clearFix cra-pos">
+							<div class="left title">D</div>
+							<div class="right pos"></div>
+						</li>	
+					</ul>
+					<div class="sel-pic clearFix hide">
+						<div class="title left">Background picture</div>
+						<div class="pic right"></div>
+					</div>
+				</div>
+				<div class="quad-edit-text hide">
+					<textarea name="" cols="31" rows="25" data-bind-0="name" class="quad-text" onpaste="javascript:return false;" maxlength="128"></textarea>
+					<div class="text-bg clearFix">
+						<div class="left i18n title" name="i18n_fontbg"></div>
+						<div class="right text"><input type="text"></div>
+					</div>
+					<div class="text-font clearFix">
+						<div class="left title i18n" name="i18n_Typeface"></div>
+						<div class="right text">SimHei</div>
+					</div>
+					<div class="text-color clearFix">
+						<div class="left title i18n" name="i18n_fontcolor"></div>
+						<div class="right text"><input type="text"></div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="quad-foot">
+			<button class="i18n" name="i18n_determine"></button>
+		</div>
+	</div>
+	<!-- register -->
+	<from class="register-body">
+		<div class="close right clearFix"><i class="iconfont icon-close"></i></div>
+		<div class="user email"> 
+            <p name="i18n_regEmail" class="i18n">邮箱</p>
+            <input type="text" autocomplete="off" >
+            <div class="email-title"></div>
+        </div>
+        <div class="user phone"> 
+            <p name="i18n_regEmailOrPhone" class="i18n"></p>
+            <input type="text">
+            <div class="email-title"></div>
+        </div>
+        <div class="user password">
+            <p class="i18n" name="i18n_password">密码</p>
+            <input type="password" autocomplete="off" >
+            <div class="password-title"></div>
+        </div>
+        <div class="user confirm">
+            <p class="i18n" name="i18n_confirmPassword">确认密码</p>
+            <input type="password" autocomplete="off" >
+            <div class="confirm-title"></div>
+        </div>
+        <div class="user emailCode">
+            <p name="i18n_messageCode" class="i18n">验证码</p>
+            <input type="text" autocomplete="off">
+            <div class="code-title"></div>
+            <span name="i18n_sendCode" class="i18n">发送验证码</span>
+        </div>
+        <div class="user invite">
+            <p name="i18n_inviteCode" class="i18n">邀请码(选填)</p>
+            <input type="text" autocomplete="off" >
+        </div>
+        
+        <div class="user user-register">
+            <button name="i18n_signUp" class="i18n">注册</button>
+        </div>
+         <div class="user userSignInfo"> 
+             <span name="i18n_alreadAccount" class="i18n"> 已有账号？</span>
+             <span class="registerSign i18n" name="i18n_signIn"> 登录</span>
+        </div>
+        <div class="register-success" style="display:none;">
+            <div class="success-load">
+                <img src="images/Checkbox-On.png" alt="">
+                <div class="i18n" name="i18n_signupSeccess">注册成功</div>
+            </div>
+        </div>
+	</from>
+	<!-- upload video end -->
+	<!-- purchase -->
+    <div class="purchase-cn" style="display: none;">
+        <p class="purchase-title clearFix"><span class="left">完成购买</span><span class="right close iconfont icon-close"></span></p>
+        <div class="userInfo">
+           <p class="purchase-username">
+            请单击下面的支付按钮，完成购买云导播月订阅
+           </p>
+        </div>
+        <div class="money">
+            <span>￥</span>
+            <span>800</span>
+            <span class="recharge-method">/月</span>
+        </div>
+        <div class="purchaseInfo">
+            <p>服务包含:</p>
+            <ul>
+                <li>•<span>每月使用10小时（每增加10小时，另外额外支付 800 元）</span></li>
+                <li>• <span>4个直播源</span></li>
+                <li>• <span>特效包含：叠加文字，比分牌和画中画</span></li>
+                <li>• <span>将直播视频发布到多个媒体平台，包括一直播、熊猫直播，或直接发布到流媒体服务器 </span></li>
+                <li>• <span>专业的售后服务</span></li>
+                <li>• <span>随时取消</span></li>
+            </ul>
+        </div>
+        <div class="discount clearFix">
+            <div class="left ">
+                邀请码用户立减
+            </div>
+            <div class="del-money right">
+                - ¥ 80
+            </div>
+            
+        </div>
+        <div class="to-pay">
+            <button>立即支付720元</button>
+        </div>
+        <div class="terms">
+            <p>购买即表示您同意<span>《服务条款》</span>
+            </p>
+        </div>
+        <div class="load" style="display:none;">
+            <div class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="rule" style="display:none;">
+            <p>服务条款说明</p>
+            <p> TVU Networks不承担任何云导播服务引发的法律责任或者因为导播服务用于商业用途而带来的任何后果。</p>
+            <p>对于接受月付费方式的用户，如果在一个月内，使用时间超过10小时，系统会提示是否扣除附加费用，而且当月剩余的使用时间将在下月清空。</p>
+            <p>您可以随时在产品页面的“用户管理”选项中取消月费订购。 您的订购扣费是按月进行的，取消订购后在下月将不再扣费，但不提供任何退款。 对该产品的支持仅限电子邮件。 </p>
+            <p>支持电子邮件地址是<span>Support@tvunetworks.com</span></p>
+            <div>ok</div>
+        </div>  
+    </div>
+    <div class="payqrimg">
+        <p class="clearFix"><span class="left">微信支付</span><span class="right close iconfont icon-close"></span></p>
+        <div class="pay-body">
+            <div class="left code-title">
+                <div class="left"><img src="./images/scanscan.png" alt=""></div>
+                <div class="right">请使用微信扫一扫 扫描二维码支付</div>
+                <div id="payimg"></div>
+            </div>
+            <div class="right">
+                <img src="./images/weixin_scan.png" alt="">
+            </div>
+        </div> 
+    </div>
+    <!-- <div class="fb-auth"><iframe src="https://cc.tvunetworks.com/tvucc/fbadapter.html" frameborder="0"></iframe></div> -->
+	<!-- hidden element -->
+	<input type="hidden" name="user_role" id="user_role" />
+	<input id="app_Id" type="hidden"/>
+	<input id="userBehavior" type="hidden"/>
+</body>
+<!-- build:js ./script/jquery.min.js -->
+<script src="./js/utils/jquery.min.js"></script>
+<!-- endbuild -->
+<script src="./js/utils/fastclick.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/jquery.headroom.min.js -->
+<script src="./js/utils/jquery.headroom.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/jquery-ui.min.js -->
+<script src="./js/utils/jquery-ui.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/jquery.fn.common.min.js -->
+<script src="./js/utils/jquery.fn.common.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/bootstrap.js -->
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/datetimepicker.min.js -->
+<script src="./js/utils/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/jquery.nicescroll.min.js -->
+<script src="./js/utils/jquery.nicescroll.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/scoreBaseData.min.js -->
+<script src="./js/uncompress/scoreBaseData.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/spectrum.js -->
+<script src="./js/utils/bgrins-spectrum/spectrum.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/placeholder.js -->
+<script src="./js/utils/placeholder.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/i18n_switchLanguage.min.js -->
+<script src="./js/utils/i18n_switchLanguage.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/jquery.i18n.properties.min.js -->
+<script src="./js/utils/jquery.i18n.properties.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/fn.oUtils.min.js -->
+<script src="./js/utils/fn.oUtils.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/in18_trans.js -->
+<script src="./js/uncompress/i18n_trans.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/encryption.min.js -->
+<script src="./js/utils/encryption.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/volumeAndErphone.js -->
+<script src="./js/uncompress/volumeAndErphone.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/socket.io.min.js -->
+<script src="./js/utils/socket.io.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/producerProClient.js -->
+<script src="./js/uncompress/producerProClient.js"></script>
+<script src="./js/uncompress/overToPreview.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/demo.js -->
+<script src="./js/uncompress/buildVersion.js"></script>
+<script src="./js/uncompress/initSystemAndWs.js"></script>
+<script src="./js/uncompress/resourcePool.js"></script>
+<script src="./js/uncompress/initOverlay.js"></script>
+<script src="./js/uncompress/demo.js"></script>
+<script src="./js/uncompress/overlay.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/fn.array.min.js -->
+<script src="./js/utils/fn.array.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/fn.loadPage.min.js -->
+<script src="./js/utils/fn.loadPage.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/headroom.min.js -->
+<script src="./js/utils/headroom.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/aes.min.js -->
+<script src="./js/utils/aes.js"></script>
+<script src="./js/utils/pad-iso10126-min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/index.js -->
+<script src="./js/uncompress/index.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/adapter.min.js -->
+<script src="./js/utils/adapter.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/getStats.min.js -->
+<script src="./js/utils/getStats.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/pushRender.js -->
+<script src="./js/uncompress/pushRender.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/pushEvent.js -->
+<script src="./js/uncompress/facebookapi.js"></script>
+<script src="./js/uncompress/pushEvent.js"></script>
+<!-- <script src="./js/uncompress/resourcePool.js"></script> -->
+<script src="./js/uncompress/overlayCut.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/clipDot.js -->
+<script src="./js/uncompress/clipDot.js"></script>
+<script src="./js/uncompress/quadView.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/record.js -->
+<script src="./js/uncompress/record/record.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/base64js.min.js -->
+<script src="./js/utils/base64js.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/producerPro.js -->
+<script src="./js/uncompress/producerPro.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/voIp.js -->
+<script src="./js/uncompress/voIP.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/producerCommon.js -->
+<script src="./js/uncompress/producerCommon.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/register.js -->
+<script src="./js/uncompress/register.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/dragChange.js -->
+<script src="./js/uncompress/dragChange.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/qrcode.min.js -->
+<script src="./js/utils/qrcode.min.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/dragAndDrop.min.js -->
+<script src="./js/utils/drag-master/dragAndDrop.js"></script>
+<!-- endbuild -->
+<!-- build:js ./script/singular.live.js -->
+<script src="./js/uncompress/singular.live.js"></script>
+<!-- endbuild -->
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Producer Register</title>
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta id="i18n_pagename" content="index">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+    <link rel="icon" href="../favicon.ico"  type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+    <link rel="stylesheet" href="../css/register.css?version=51">
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="../images/logo.png" alt=""></div>
+        <div class="header-title">TVU Producer</div>
+    </div>
+    <div class="success-load-big">
+        <div class="success-img">
+            <img src="../images/Group.png" alt="">
+        </div>
+        <p class="success-welcome i18n" name="i18n_WelcomeTP">Welcome to TVU Producer!</p>
+        <p class="redirect"><span class="i18n" name="i18n_youWill">You will redirected to Producer in </span><span class="seconds">5</span><span class="i18n" name="i18n_Seconds">Secords</span> <a href="" class="i18n" name="i18n_ClickHere">Click here</a><span class="i18n" name="i18n_StartNow">to get start now.</span></p>
+    </div>
+    <script src="../js/utils/jquery.min.js"></script>
+    <script src="../js/utils/fastclick.js"></script>
+    <!-- <script src="../js/uncompress/register.js"></script> -->
+    <script>
+        var timer = "";
+        successLoadPage();
+        function successLoadPage(){
+            var time = 5;
+            timer = setInterval(function(){
+                if(time<=1){
+                    clearInterval(time);
+                    time = 5;
+                    var usersession=localStorage.getItem("session");
+                    window.location.href = "http://" + window.location.host + "/producerpro/index?pn=sd&"+"session=" +usersession ;
+                }else{
+                    time--;
+                    $(".redirect .seconds").html(time);
+                }
+            },1000);
+        }
+
+        $(".redirect a").click(function(){
+            var usersession= localStorage.getItem("session");
+            var url= "http://" + window.location.host + "/producerpro/index?pn=sd&"+"session=" +usersession ;
+            $(".redirect a").attr("href",url);   
+        })
+    </script>
+    <script src="../js/utils/i18n_switchLanguage.js"></script>
+    <script src="../js/utils/jquery.i18n.properties.min.js"></script>
+</body>
+</html>

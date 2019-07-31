@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>TVU Central Management</title>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    	<link rel="icon" href="./favicon.ico"  type="image/x-icon" />
+		<link rel="shortcut icon" href="../favicon.ico"  type="image/x-icon"/>
+		<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/utils/datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/support.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/producerRecharge.css"/>
+	</head>
+	<body>
+ 		<div class="header">
+			<div class="container-fluid">
+				<div class="row">
+ 				<div class="navbar-header col-sm-6 col-xs-10">
+ 					<a class="navbar-brand" href="#">
+				        <img alt="TVU Logo" class="logo-icon" src="../images/logo_pageIcon.png">
+				    </a>
+				    <span class="nav-text">Producer Management</span>
+ 			    </div>
+	        	
+ 				<div class="col-sm-6 col-xs-2 log-content text-right">
+			        <div class="logout hidden-xs right">
+			        	<a class="logout-btn" onclick="logout();" href="javascript:;">LOGOUT</a>
+			        </div>
+		            <div class="user-info right">
+		            	<span class="glyphicon glyphicon-user user-icon dropdown-toggle" data-toggle="dropdown">
+		            		<span class="show-user caret hidden-lg hidden-md hidden-sm"></span>
+		            	</span>
+		            	
+			            <span class="show-name hidden-xs" id="userName"></span>
+			            <ul class="dropdown-menu logout-menu">
+                          <li><a href="logout" onclick="logout();">LogOut</a></li>
+                        </ul>
+			        </div>
+		       	</div>
+				</div>
+			</div>
+ 		</div>
+		
+		<nav class="navbar navbar-default">
+			 <div class="container-fluid">
+			 	<div class="navbar-header">
+	              <button type="button" id="collapse" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	              </button>
+	            </div>
+			 </div>
+			 <div class="collapse navbar-collapse" id="navbar">
+			 	<ul class="nav navbar-nav">
+			 		<li><a class="tab-btn" id="ServerList" href="">Server List</a></li>
+			 		<li><a class="tab-btn  tab-active" href="javascript:;">User List</a></li>
+			 		<li><a class="tab-btn" id="Image" href="">Image</a></li>	
+			 		<li><a class="tab-btn" id="Update" href="">Update</a></li>	
+			 	</ul>
+			 </div>
+		</nav>
+		<div class="operate">
+			<div class="search-content container-fluid server">
+				<div class="row">
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="search-box">
+							<div class="dropdown left change-option">
+								<button class="btn btn-default dropdown-toggle full-width" type="button" id="searchOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							    Name
+							    <span class="caret"></span>
+							  	</button>
+							</div>
+
+						    <div class="input-group">
+						        <input type="text" class="form-control" id="filterText" placeholder="" onkeydown="searchServerList(event, this);">
+						        <span class="input-group-btn">
+						        <button class="btn btn-default glyphicon glyphicon-search" type="button" id="searchBtn"></button>
+						        </span>
+						    </div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" id="filterList">
+					<!-- <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+						<div class="dropdown">
+							<button class="btn dropdown-toggle" type="button" id="selectType" data-type="0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <span class="text">Subscription</span>
+						    <span class="caret"></span>
+						  	</button>
+						  	<ul class="dropdown-menu full-width"  id="selectList" aria-labelledby="selectType">
+							    <li><a href="javascript:;" data-type="1">Subscription(Yes)</a></li>
+							    <li><a href="javascript:;" data-type="2">Subscription(No)</a></li>
+							</ul>
+						</div>
+						
+					</div> -->
+					<div class="date-box hide col-lg-2 col-md-3 col-sm-6 col-xs-12">
+					    <div class="input-group date-group">
+					        <input type="text" class="form-control time-input start-time" readonly>
+					        <span class="input-group-btn">
+					        <button class="btn glyphicon glyphicon-calendar date-icon" type="button"></button>
+					        </span>
+					    </div>
+					</div>
+					<div class="date-box hide col-lg-2 col-md-3 col-sm-6 col-xs-12">
+					    <div class="input-group date-group">
+					        <input type="text" class="form-control time-input end-time" readonly>
+					        <span class="input-group-btn">
+					          <button class="btn glyphicon glyphicon-calendar date-icon" type="button"></button>
+					        </span>
+					    </div>
+					</div>
+					<!-- <div id="addBtn" class="col-md-1 col-sm-2 col-xs-12">
+						<button type="button" class="btn add-btn" data-toggle="modal" data-target="#myModal">Add</button>
+					</div> -->
+					<div id="filterBtn" class="col-md-1 col-sm-2 col-xs-12 hide">
+						<button type="button" class="btn filter-btn" id="filter">Filter</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid main-content server" >
+			<div class="table-responsive table-hover">
+				<table class="table">
+					<thead>
+						<th>Num</th>
+						<th>Name</th>
+						<th>Invite Code</th>
+						<th>Register Time</th>
+						<th>Location</th>
+						<!-- <th>Subscription</th> -->
+						<th>Time Remaining</th>
+						<th>Expired Date</th>
+						<th>Total Charge ( $ )</th>
+						<th>Operation</th>
+					</thead>
+			   		<tbody class="main-tbody" id="rechargeBody">
+			   			<tr>
+			   				<td>---</td>
+			   				<!-- <td>---</td> -->
+			   				<td>---</td>
+				   			<td>---</td>
+				   			<td>---</td>
+				   			<td>---</td>
+				   			<td>---</td>
+				   			<td>---</td>
+			   			</tr>
+			   		</tbody>
+			  	</table>
+			  <!-- 1 -->
+			</div>
+			<div class="row hide" id="pageRow">
+				<div class="jump-page col-sm-12 text-right" id="paging">
+					<span class="page-btn">
+				        <input type="text" class="page-input" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="3" value="1">
+				      	<a href="javascript:;" class="forward-icon glyphicon glyphicon-share-alt" onclick="paging('gopaging')"></a>
+				    </span>
+					
+					<div class="dropdown right">
+					  	<button class="btn dropdown-toggle" type="button" id="pageList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="every-page">10</span>
+					    <span class="caret"></span>
+					  </button>
+					  	<ul class="dropdown-menu" id="pageOption" aria-labelledby="pageList">
+							<li><a href="javascript:;">10</a></li>
+						    <li><a href="javascript:;">20</a></li>
+						    <li><a href="javascript:;">50</a></li>
+						    <li><a href="javascript:;">100</a></li>
+						</ul>
+					</div>
+
+					<span class="page-icon page-last right glyphicon glyphicon-step-forward" onclick="paging('lastpage')"></span>
+					<span class="page-icon page-next right glyphicon glyphicon-triangle-right" onclick="paging('nextpage')"></span>
+					
+					<span class="right page-num-area"><span class="current-page">1</span>/<span class="total-page">1</span></span>
+					
+					<span class="page-icon page-prve right glyphicon glyphicon-triangle-left" onclick="paging('prvepage')"></span>
+					<span class="page-icon page-first right glyphicon glyphicon-step-backward" onclick="paging('firstpage')"></span>
+				</div>
+			</div>
+		</div>
+<!-- </div> -->
+    <!-- addTime -->
+	<div class="modal fade bs-example-modal-sm" id="addTimeModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content" id="addTimeContent">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Set Time</h4>
+	       <!--  <input type="text" hidden id="addtimeId"> -->
+	      </div>
+	      <div class="modal-body">
+	        <div class="form-group">
+			    <label for="assignName">Amount</label>
+			    <input type="text" class="form-control input-border" id="addTimeInput" placeholder="Number" maxlength="64">
+				<span class="time-min">Hours</span>
+				<div class="ExpiredDate">
+					<label for="assignName" class="UpdateTitle">Expired Date</label>
+					<div class="input-group input-border vaildDate">
+						<input type="text" class="form-control expired-date" readonly>
+					</div>
+				</div>	
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" id="addTimeDone" onclick=" saveAddTime()" data-dismiss="modal">Done</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    <!-- history -->
+	<div class="modal fade bs-example-modal-sm" id="chargeHistory" tabindex="-1" role="dialog">
+	  	<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Charge History</h4>
+		      	</div>
+		      	<div class="modal-body">
+			      	<p class="historyName"></p>
+			      	<p class="historyTotal">Total Charge:<span class="totalCharge"></span></p>
+		       		<div class="table-responsive table-hover">
+						<table class="table" id="runningTable">
+							<thead>
+								<th>Date</th>
+								<th>Item</th>
+								<th>Charge</th>
+							</thead>
+					   		<tbody class="main-tbody" id="historyBody">
+					   			<tr>
+					   				<td>---</td>
+					   				<td>---</td>
+						   			<td>---</td>
+					   			</tr>
+					   		</tbody>
+					  	</table>
+					</div>
+		    	</div>
+			    <div class="modal-footer">
+			        <button type="button" class="btn btn-success"  data-dismiss="modal" id="historyDone">OK</button>
+			    </div>
+		    </div>
+	  	</div>
+	</div>
+	<!-- Usage History -->
+	<div class="modal fade bs-example-modal-sm" id="UsageHistory" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Usage History</h4>
+				</div>
+				<div class="modal-body">
+					<p class="historyName"></p>
+					<p class="historyTotal">Total Charge:<span class="totalCharge"></span></p>
+					<div class="table-responsive table-hover">
+						<table class="table">
+							<thead>
+								<th>Date</th>
+								<th>Item</th>
+								<th>duration</th>
+								<th>Time Remaining</th>
+							</thead>
+							<tbody class="main-tbody" id="usageHistoryBody">
+								<tr>
+									<td>---</td>
+									<td>---</td>
+									<td>---</td>
+									<td>---</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success"  data-dismiss="modal" id="usagehistoryDone">OK</button>
+			 	</div>
+		  	</div>
+		</div>
+  	</div>
+	<!-- error pop -->
+	<div class="modal" id="errorModal" tabindex="-1" role="dialog">
+	  	<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Warning</h4>
+		      	</div>
+		     	<div class="modal-body">
+		        	<p id="errorInfo" class="text-center"></p>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+		      	</div>
+		    </div>
+	  	</div>
+	</div>
+	<div class="modal" id="receiverModal" tabindex="-1" role="dialog">
+	  	<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      	<div class="modal-header">
+		       	 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Receiver Information</h4>
+		      	</div>
+		      	<div class="modal-body"></div>
+			    <div class="modal-footer">
+			        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+			    </div>
+		    </div>
+	 	</div>
+	</div>
+
+	<script src="../js/utils/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/utils/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="../js/utils/fn.oUtils.js?7"></script>
+	<script type="text/javascript" src="../js/utils/jquery.nicescroll.min.js?7"></script>
+	<script type="text/javascript" src="../js/supportCommon.js?7"></script>
+	<script type="text/javascript" src="../js/producerRecharge.js?7"></script>
+	</body>
+</html>

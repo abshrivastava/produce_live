@@ -1,0 +1,32 @@
+@media screen and (min-width: 1170px) {
+    .addImg{
+        width:150px;
+    }
+}
+.imageVer{
+    position: relative;
+}
+.imageVer .caret{
+    position: absolute;
+    right: 12px;
+    bottom: 14px;
+}
+td .rollback,td .reset{
+    margin-left: 15px;
+    border: 1px solid #5cb85c;
+    color: #5cb85c;
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#settingId{
+    text-align: center;
+    cursor: pointer;
+}
+#settingId i{
+    padding-right:5px;
+    line-height: 34px;
+    
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>TVU Central Management</title>
+        <meta http-equiv="Pragma" content="no-cache"/>
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="icon" href="./favicon.ico"  type="image/x-icon" />
+        <link rel="shortcut icon" href="../favicon.ico"  type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/support.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/producersupImage.css"/>
+    </head>
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="navbar-header col-sm-6 col-xs-10">
+                        <a class="navbar-brand" href="#">
+                            <img alt="TVU Logo" class="logo-icon" src="../images/logo_pageIcon.png">
+                        </a>
+                        <span class="nav-text">Producer Management</span>
+                    </div>
+                    
+                    <div class="col-sm-6 col-xs-2 log-content text-right">
+                        <div class="logout hidden-xs right">
+                            <a class="logout-btn" onclick="logout();" href="javascript:;">LOGOUT</a>
+                        </div>
+                        <div class="user-info right">
+                            <span class="glyphicon glyphicon-user user-icon dropdown-toggle" data-toggle="dropdown">
+                                <span class="show-user caret hidden-lg hidden-md hidden-sm"></span>
+                            </span>
+                            
+                            <span class="show-name hidden-xs" id="userName"></span>
+                            <ul class="dropdown-menu logout-menu">
+                              <li><a href="logout" onclick="logout();">LogOut</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar navbar-default">
+             <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" id="collapse" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+             </div>
+             <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a class="tab-btn" id="ServerList" href="">Server List</a></li>
+                    <li><a class="tab-btn" id="userList" href="">User List</a></li>
+                    <li><a class="tab-btn tab-active" href="javascript:;">Image</a></li>
+                    <li><a class="tab-btn" id="Update" href="">Update</a></li>
+                </ul>
+             </div>
+        </nav>
+    <div class="search-content container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="search-box">
+                    <div class="dropdown left change-option">
+                        <button class="btn btn-default dropdown-toggle full-width" type="button" id="searchOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Location
+                        <span class="caret"></span>
+                        </button>
+                        <!-- <ul class="dropdown-menu" aria-labelledby="searchOption">
+                            <li><a href="#">Name</a></li>
+                            <li><a href="#">IP</a></li>
+                            <li><a href="#">Location</a></li>
+                            <li><a href="#">Start Time</a></li>
+                            <li><a href="#">End Time</a></li>
+                            <li><a href="#">Duration</a></li>
+                        </ul> -->
+                    </div>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="filterText" placeholder="" onkeydown="searchServerList(event, this);">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default glyphicon glyphicon-search" type="button" id="searchBtn"></button>
+                      </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 addImg">
+                <button type="button" class="btn add-btn" data-toggle="modal" data-target="#addImageModal">Add a version</button>
+            </div>
+            <div class="col-md-2 col-lg-1 col-sm-3 col-xs-12 col-md-offset-4 col-lg-offset-5">
+                <div id="settingId"><i class="glyphicon glyphicon-cog"></i>Settings</div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid main-content" >
+        <div class="table-responsive table-hover">
+            <table class="table">
+                <thead>
+                    <th>Num</th>
+                    <th>Location</th>
+                    <th>Zone</th>
+                    <th>current version</th>
+                    <th>previous version</th>
+                    <th>Num of null</th>
+                    <th>Operation</th>
+                </thead>
+                <tbody class="main-tbody" id="ImageList">
+                    <tr>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>--- <span class="rollback">rollback→</span></td>
+                        <td>---</td>
+                        <td>---</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="addImageModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add a version</h4>
+          </div>
+          <div class="modal-body">
+            <form id="imageForm">
+                <div class="form-group">
+                    <label for="assignName">ID</label>
+                    <input type="text" name="imageId" class="form-control input-border" placeholder="Please enter ID" maxlength="64">
+                </div>
+                <div class="form-group">
+                    <label for="assignName">New Version</label>
+                    <input type="text" name="version" class="form-control input-border" placeholder="Please enter new version number" maxlength="64">
+                </div>
+                <div class="form-group imageVer" style="position:relative;">
+                    <label for="imageVersion">Select a location to update</label>
+                    <input type="text" id="imageVersion" name="region" class="form-control input-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Select all" maxlength="64">
+                    <span class="caret" for="imageVersion"></span>
+                    <ul class="dropdown-menu select-version" aria-labelledby="imageVersion">
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="assignName">Remark(optional)</label>
+                    <input type="text" name="remark" class="form-control input-border" placeholder="Please enter remark" maxlength="64">
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="addImage()" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="changeImageModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Settings</h4>
+            </div>
+            <div class="modal-body">
+              <form id="changeImage">
+                  
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" onclick="updateImageId()" data-dismiss="modal">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!-- error pop -->
+    <div class="modal" id="errorModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Warning</h4>
+          </div>
+          <div class="modal-body">
+            <p id="errorInfo" class="text-center"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="receiverModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Receiver Information</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 信息删除确认 -->
+    <div class="modal fade" id="delcfmModel">
+        <div class="modal-dialog">
+          <div class="modal-content message_align">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete it?</p>
+            </div>
+            <div class="modal-footer">
+                 <input type="hidden" id="url"/>
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                 <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">Ok</a>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+
+    <script src="../js/utils/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/utils/fn.oUtils.js?7"></script>
+    <script type="text/javascript" src="../js/utils/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="../js/supportCommon.js?7"></script>
+    <script type="text/javascript" src="../js/producerSupImage.js?8"></script>
+    
+    </body>
+</html>

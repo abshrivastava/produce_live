@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>TVU Central Management</title>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    	<link rel="icon" href="./favicon.ico"  type="image/x-icon" />
+		<link rel="shortcut icon" href="../favicon.ico"  type="image/x-icon"/>
+		<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/utils/datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/support.css?2"/>
+	</head>
+ 		<div class="header">
+			<div class="container-fluid">
+				<div class="row">
+ 				<div class="navbar-header col-sm-6 col-xs-10">
+ 					<a class="navbar-brand" href="#">
+				        <img alt="TVU Logo" class="logo-icon" src="../images/logo_pageIcon.png">
+				    </a>
+				    <span class="nav-text">Producer Management</span>
+ 			    </div>
+	        	
+ 				<div class="col-sm-6 col-xs-2 log-content text-right">
+			        <div class="logout hidden-xs right">
+			        	<a class="logout-btn" onclick="logout();" href="javascript:;">LOGOUT</a>
+			        </div>
+		            <div class="user-info right">
+		            	<span class="glyphicon glyphicon-user user-icon dropdown-toggle" data-toggle="dropdown">
+		            		<span class="show-user caret hidden-lg hidden-md hidden-sm"></span>
+		            	</span>
+		            	
+			            <span class="show-name hidden-xs" id="userName"></span>
+			            <ul class="dropdown-menu logout-menu">
+                          <li><a href="logout" onclick="logout();">LogOut</a></li>
+                        </ul>
+			        </div>
+		       	</div>
+				</div>
+			</div>
+ 		</div>
+		
+		<nav class="navbar navbar-default">
+			 <div class="container-fluid">
+			 	<div class="navbar-header">
+	              <button type="button" id="collapse" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	              </button>
+	            </div>
+			 </div>
+			 <div class="collapse navbar-collapse" id="navbar">
+			 	<ul class="nav navbar-nav">
+			 		<li><a class="tab-btn tab-active" href="javascript:;">Server List</a></li>
+			 		<li><a class="tab-btn" id="userList" href="">User List</a></li>
+			 		<li><a class="tab-btn" id="Image" href="">Image</a></li>
+			 		<li><a class="tab-btn" id="Update" href="">Update</a></li>
+			 	</ul>
+			 </div>
+		</nav>
+	<div class="operate">
+		<div class="search-content container-fluid server">
+			<div class="row">
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<div class="search-box">
+						<div class="dropdown left change-option">
+							<button class="btn btn-default dropdown-toggle full-width" type="button" id="searchOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Name
+						    <span class="caret"></span>
+						  	</button>
+						  	<!-- <ul class="dropdown-menu" aria-labelledby="searchOption">
+							    <li><a href="#">Name</a></li>
+							    <li><a href="#">IP</a></li>
+							    <li><a href="#">Location</a></li>
+							    <li><a href="#">Start Time</a></li>
+							    <li><a href="#">End Time</a></li>
+							    <li><a href="#">Duration</a></li>
+						  	</ul> -->
+						</div>
+
+					    <div class="input-group">
+					      <input type="text" class="form-control" id="filterText" placeholder="" onkeydown="searchServerList(event, this);">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default glyphicon glyphicon-search" type="button" id="searchBtn"></button>
+					      </span>
+					    </div>
+					</div>
+				</div>
+				<div class="hidden-xs right" style="display: none;">
+					<a href="javascript:;" class="output-btn">
+						<span class="glyphicon glyphicon-new-window">Excel</span>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="row" id="filterList">
+				<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+					<div class="dropdown">
+						<button class="btn dropdown-toggle" type="button" id="selectType" data-type="0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="text">Running</span>
+					    <span class="caret"></span>
+					  	</button>
+						<ul class="dropdown-menu full-width"  id="selectList" aria-labelledby="selectType">
+						    <li><a href="javascript:;" data-type="1">History</a></li>
+						    <li><a href="javascript:;" data-type="0">Running</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="date-box hide col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				    <div class="input-group date-group">
+				      <input type="text" class="form-control time-input start-time" readonly>
+				      <span class="input-group-btn">
+				        <button class="btn glyphicon glyphicon-calendar date-icon" type="button"></button>
+				      </span>
+				    </div>
+				</div>
+				<div class="date-box hide col-lg-2 col-md-3 col-sm-6 col-xs-12">
+				    <div class="input-group date-group">
+				      <input type="text" class="form-control time-input end-time" readonly>
+				      <span class="input-group-btn">
+				        <button class="btn glyphicon glyphicon-calendar date-icon" type="button"></button>
+				      </span>
+				    </div>
+				</div>
+				<div id="addBtn" class="col-md-1 col-sm-2 col-xs-12">
+					<button type="button" class="btn add-btn" data-toggle="modal" data-target="#myModal">Add</button>
+				</div>
+				<div id="filterBtn" class="col-md-1 col-sm-2 col-xs-12 hide">
+					<button type="button" class="btn filter-btn" id="filter">Filter</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="container-fluid main-content server" >
+		<div class="table-responsive table-hover">
+			<table class="table" id="runningTable">
+				<thead>
+					<th>Num</th>
+					<th>Name</th>
+					<th>IP</th>
+					<th>Location</th>
+					<th>Marking</th>
+					<th>Status</th>
+					<th>Duration</th>
+					<th>Operation</th>
+				</thead>
+		   		<tbody class="main-tbody" id="runningBody">
+		   			<tr>
+		   				<td>---</td>
+		   				<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+		   			</tr>
+		   		</tbody>
+		  	</table>
+		  	<table class="table hide" id="historyTable">
+				<thead>
+					<th>Num</th>
+					<th>Name</th>
+					<th>IP</th>
+					<th>Location</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Duration</th>
+				</thead>
+		   		<tbody class="main-tbody" id="historyBody">
+		   			<tr>
+		   				<td>---</td>
+		   				<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+			   			<td>---</td>
+		   			</tr>
+		   		</tbody>
+		  	</table>
+		</div>
+		<div class="row hide" id="pageRow">
+			<div class="jump-page col-sm-12 text-right" id="paging">
+				<span class="page-btn">
+			      <input type="text" class="page-input" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="3" value="1">
+			      <a href="javascript:;" class="forward-icon glyphicon glyphicon-share-alt" onclick="paging('gopaging')"></a>
+			    </span>
+				
+				<div class="dropdown right">
+				  	<button class="btn dropdown-toggle" type="button" id="pageList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    <span class="every-page">10</span>
+				    <span class="caret"></span>
+				  </button>
+				  	<ul class="dropdown-menu" id="pageOption" aria-labelledby="pageList">
+						<li><a href="javascript:;">10</a></li>
+					    <li><a href="javascript:;">20</a></li>
+					    <li><a href="javascript:;">50</a></li>
+					    <li><a href="javascript:;">100</a></li>
+					</ul>
+				</div>
+
+				<span class="page-icon page-last right glyphicon glyphicon-step-forward" onclick="paging('lastpage')"></span>
+				<span class="page-icon page-next right glyphicon glyphicon-triangle-right" onclick="paging('nextpage')"></span>
+				
+				<span class="right page-num-area"><span class="current-page">1</span>/<span class="total-page">1</span></span>
+				
+				<span class="page-icon page-prve right glyphicon glyphicon-triangle-left" onclick="paging('prvepage')"></span>
+				<span class="page-icon page-first right glyphicon glyphicon-step-backward" onclick="paging('firstpage')"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Add a server</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<form id="dataForm">
+		        <div class="form-group">
+				    <label for="masterInput">MasterRId</label>
+				    <input type="text" name="masterRid" class="form-control input-border" id="masterInput" placeholder="Please enter a masterRid" maxlength="16">
+				</div>
+				<div class="form-group">
+				    <label for="slaveInput1">SlaveRId</label>
+				    <input type="text" class="form-control input-border slaveR" id="slaveInput1" placeholder="Please enter a slaveRid" maxlength="16">
+				</div>
+				<div class="form-group">
+				    <label for="slaveInput2">SlaveRId</label>
+				    <input type="text" class="form-control input-border slaveR" id="slaveInput2" placeholder="Please enter a slaveRid" maxlength="16">
+				</div>
+				<div class="form-group">
+				    <label for="slaveInput3">SlaveRId</label>
+				    <input type="text" class="form-control input-border slaveR" id="slaveInput3" placeholder="Please enter a slaveRid" maxlength="16">
+				</div>
+				<div class="form-group">
+				    <label for="locationInput">location</label>
+				    <input type="text" name="location" class="form-control input-border" id="locationInput" placeholder="Please enter a location" maxlength="16">
+				</div>
+				<div class="form-group">
+				    <label for="ipInput">IP</label>
+				    <input type="text" name="ip" class="form-control input-border" id="ipInput" placeholder="Please enter a IP address" maxlength="16">
+				</div>
+	      	</form>
+			<!-- <div class="form-group">
+			    <label for="dateInput">Expiration</label>
+			    <div class="input-group input-border">
+			      <input type="text" class="form-control add-date" readonly>
+			      <span class="input-group-btn">
+			        <button class="btn glyphicon glyphicon-calendar addDate-icon" type="button"></button>
+			      </span>
+			    </div>
+			</div>
+	      </div> -->
+	      	<div class="modal-footer modal-save-btn">
+	        	<button type="button" class="btn btn-success" id="successBtn" data-dismiss="modal">OK</button>
+	      	</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+	<div class="modal fade bs-example-modal-sm" id="assignModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Assign</h4>
+	        <input type="text" hidden id="instanceId">
+	      </div>
+	      <div class="modal-body">
+	        <div class="form-group">
+			    <label for="assignName">Assign Name</label>
+			    <input type="text" class="form-control input-border" id="assignName" placeholder="Please enter a assign name" maxlength="64">
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" onclick="saveAssign()" data-dismiss="modal">Save</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- error pop -->
+	<div class="modal" id="errorModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Warning</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p id="errorInfo" class="text-center"></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal" id="receiverModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Receiver Information</h4>
+	      </div>
+	      <div class="modal-body">
+	       	
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" id="searchDetial">
+	  	<div class="modal-dialog modal-lg" role="document">
+	    	<div class="modal-content">
+	    		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+	        		<h4 class="modal-title">Using list</h4>
+	     		</div>
+	     		<div class="modal-body">
+	     			<div class="user-email"></div>
+	       			<div class="table-responsive">
+				        <table class="table table-hover">
+				           	<thead >
+				             	<tr>
+				               		<th>Address</th>
+				               		<th>Longtitude</th>
+				               		<th>Latitude</th>
+				               		<th>User IP</th>
+				               		<th>Online Time</th>
+				               		<th>Offline Time</th>
+				               		<th>Duration</th>
+				             	</tr>   
+				           	</thead>
+				           	<tbody class="t_body">
+				            	
+				         	</tbody>
+				       	</table>
+			       	</div>
+			    </div>
+			    <div class="modal-footer">
+			        
+			    </div>
+		        
+	    	</div>
+	  	</div>
+	</div>
+
+	<script src="../js/utils/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/utils/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="../js/utils/fn.oUtils.js?7"></script>
+	<script type="text/javascript" src="../js/utils/jquery.nicescroll.min.js"></script>
+	<script type="text/javascript" src="../js/supportCommon.js?7"></script>
+	<script type="text/javascript" src="../js/producerSupport.js?7"></script>
+	</body>
+</html>

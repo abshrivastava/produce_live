@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta id="i18n_pagename" content="index">
+    <title>Producer</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <!-- build:css ./style/init.css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/init.css">
+    <!-- endbuild -->
+    <!-- build:css ./style/class.common.css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/class.common.css">
+    <!-- endbuild -->
+    <!-- build:css ./style/css/page.common.css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/page.common.css">
+    <!-- endbuild -->
+    <!-- build:css ./style/popupAlert.css -->
+    <link rel="stylesheet" type="text/css" href="./css/popupAlert.css">
+    <!-- endbuild -->
+    <!-- build:css ./style/animate.min.css -->
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <!-- endbuild -->
+    <!-- build:css ./style/index.css -->
+    <!-- <link rel="stylesheet" type="text/css" href="./css/producerPro.css"> -->
+    <!-- endbuild -->
+    <!-- build:css ./style/index.css -->
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <!-- endbuild -->
+    <!-- build:css ./style/index.css -->
+    <link rel="stylesheet" type="text/css" href="./css/common/pushclient.css">
+    <!-- endbuild -->
+</head>
+<body>
+    <form id="detailPush" class="popupContent pushCount" style="display:none;">
+        <div class="popupContent_title i18n" name="i18n_editShareSource"></div>
+        <a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+        <div class="popupContent_content">
+            <div class="popup_item resolution">
+                <div class="popup_item_text nickName i18n" name="i18n_resolution"></div>
+                <div class="popup_item_value resolutionTypeList"></div>
+            </div>
+            <div class="popup_item bitrate">
+                <div class="popup_item_text nickName i18n" name="i18n_Bitrate"></div>
+                <div class="popup_item_value BitrateTypeList"></div>
+            </div>
+            <div class="dividingLine"></div>
+            <div class="popup_item">
+                <div class="popup_item_text nickName i18n" name="i18n_OutputName"></div>
+                <input type="text" autocomplete="off" class="popup_item_value push-nickname trimItem" maxlength="32" readonly="true" />
+            </div>
+            <div class="popup_item panda-auth panda-item shareItem">
+                <div class="popup_item_text i18n" name="i18n_account"></div>
+                <div class="panda-login">
+                    <a href="javascript:;" class="inline_block btns i18n black_greenBtn panda-auth-btn" name="i18n_authenticate"></a>
+                </div>
+                <div class="panda-nickname hide">
+                    <input type="text" autocomplete="off" readonly class="popup_item_value trimItem panda-nickname-text" maxlength="255"/>
+                </div>
+            </div>
+            <div class="popup_item push-title">
+                <div class="popup_item_text i18n" name="i18n_VideoTitle"></div>
+                <input type="text" autocomplete="off" class="popup_item_value trimItem" maxlength="45">
+            </div>
+            <div class="detail-info">
+
+            </div> 
+        </div>
+        <div class="popupContent_footer middle">
+            <div class="inline-blocks">
+                <div style="display: inline-block;">
+                    <input class="btns greenBtn popupOperationBtn pushDetailbtn i18n-input" selectname="i18n_publish" readonly="true" />
+                    <span class="btns greenBtn popupOperationBtn loading  hide"><img src="./images/switch.gif" alt=""></span>   
+                </div>
+                <input type="button" value="Cancel" class="btns grayBtn popupOperationBtn i18n-input cancel addExtSource_cancelAdd" selectname="i18n_cancel"/>
+            </div>
+        </div>
+    </form>
+    <form id="addShareSource" class="popupContent pushCount" style="display:none;" autocomplete="off">
+        <a href="javascript:;" class="iconfont icon-close-circle popupContent_closeBtn"></a>
+        <div class="popupContent_title i18n" name="i18n_socialAccount"></div>
+        <div class="popupContent_content">
+            <div class="popup_item">
+                  <div class="popup_item_text i18n" name="i18n_OutputName"></div>
+                  <input type="text" autocomplete="off" class="popup_item_value trimItem push-nickname" maxlength="32"/>
+            </div>
+            <div class="popup_item">
+                <div class="popup_item_text i18n" name="i18n_websiteType"></div>
+                <div class="popup_item_value" id="addExtSource_sourceTypeList"></div>
+            </div>
+            <div class="detail-info">
+                
+            </div>
+            <div class="popup_item panda-auth panda-item shareItem">
+                <div class="popup_item_text i18n" name="i18n_account"></div>
+                <div class="panda-login">
+                    <a href="javascript:;" class="inline_block btns i18n black_greenBtn panda-auth-btn" name="i18n_authenticate"></a>
+                </div>
+                <div class="panda-nickname hide">
+                    <input type="text" autocomplete="off" readonly class="popup_item_value trimItem panda-nickname-text" maxlength="255"/>
+                </div>
+            </div>
+        </div>
+        <div class="popupContent_footer middle">
+            <div class="inline-blocks">
+                <div style="display: inline-block;">
+                    <input type="button" class="btns greenBtn popupOperationBtn add-count i18n-input" selectname="i18n_save"/>
+                </div>
+                <input type="button" value="Cancel" class="btns grayBtn popupOperationBtn i18n-input cancel addExtSource_cancelAdd" selectname="i18n_cancel"/>
+            </div>
+        </div>
+    </form>
+    <!-- build:js ./script/jquery.min.js -->
+    <script src="./js/utils/jquery.min.js"></script>
+    <script src="./js/utils/fastclick.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.headroom.min.js -->
+    <script src="./js/utils/jquery.headroom.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery-ui.min.js -->
+    <script src="./js/utils/jquery-ui.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.fn.common.min.js -->
+    <script src="./js/utils/jquery.fn.common.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.nicescroll.min.js -->
+    <script src="./js/utils/jquery.nicescroll.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/i18n_switchLanguage.min.js -->
+    <script src="./js/utils/i18n_switchLanguage.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.i18n.properties.min.js -->
+    <script src="./js/utils/jquery.i18n.properties.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/fn.oUtils.min.js -->
+    <script src="./js/utils/fn.oUtils.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/in18_trans.js -->
+    <script src="./js/uncompress/i18n_trans.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/aes.min.js -->
+    <script src="./js/utils/aes.js"></script>
+    <script src="./js/utils/pad-iso10126-min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/pushEvent.js -->
+    <script src="./js/uncompress/facebookapi.js"></script>
+    <script src="./js/uncompress/pushRender.js"></script>
+    <script src="./js/uncompress/pushEvent.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

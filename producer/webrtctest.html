@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>rtc peer</title>
+        <link rel="icon" href="data:;base64,=">
+        <link rel="stylesheet" href="./css/meter.css" />
+    </head>
+
+    <body> 
+        <div id="send"></div>
+        <div id="receiver"></div>
+        <p id="ttusers"> <p/>
+        <div id='peer'>
+            <input type="text" id="username" name="username" placeholder="username"/>
+            <button type="button" id="login" onclick="on_login()">login</button> 
+            <br/>
+            <br/>
+            <input type="text" id="peerid" name="peerid" placeholder="peerid"/>
+            <button type="button" width id="rtc" onclick="on_rtc()">rtc</button>
+
+            <br/>
+            <button type="button" id="leave" onclick="on_leave()" hidden>leave</button>
+        </div>
+        <div id="meters">
+            <div id="instant">
+              <div class="label">Instant (20Hz): </div>
+              <meter high="25" max="100" value="0"></meter>
+              <div class="value"></div>
+            </div>
+            <div id="slow">
+              <div class="label">Slow (1Hz): </div>
+              <meter high="25" max="100" value="0"></meter>
+              <div class="value"></div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <!-- <div class="replay">
+            <input type="text" id="rid" placeholder="rid" value="1BE2AB744747B06D">
+            <input type="text" id="fileName" placeholder="Nickname" value="Default">
+            <input type="button" id="replay" value="replay"><br>
+            pts:&nbsp;&nbsp;<input type="text" id="pts" value="" placeholder="pts title">
+        </div> -->
+        <!-- <div id="errorMsg" hidden></div>
+        <div id="stats"></div>
+        <div id="s3img"></div> -->
+        <script src="./js/utils/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="./js/utils/socket.io.js"></script>
+        <script type="text/javascript" src="./js/utils/adapter.js"></script>
+        <script type="text/javascript" src="./js/soundmeter.js"></script>
+        <script type="text/javascript" src="./js/client.js"></script>
+        <script src="./js/utils/getStats.js"></script>
+        <!-- <script>
+        var num = 0;
+        setInterval(function(){
+            num++;
+            var random = Math.random();
+            var img = '<div style="float:left;">\
+                <img src="https://pp-va-001.s3.amazonaws.com/ff80808162199caa0162430caa3b0004/records/StudioOutputPreview/2018-07-24-02-49-54-7409.jpg?random='+random+'" alt="">\
+                <div>\
+                    '+num+'\
+                </div>\
+            </div>'; 
+            $("#s3img").append(img);
+        },1000); 
+        </script> -->
+    </body>
+</html>

@@ -1,0 +1,116 @@
+body{font-family: gotham,verdana;}
+.tab-active {border-bottom: 4px solid #4cae4c;}
+.active {background: #368848!important;}
+a:focus, a:hover {color: #33AA50; text-decoration: none;}
+input, button {outline: none!important; box-shadow: none!important;}
+.header {width: 100%; height: 0.8rem; line-height: 0.8rem; background-color: #252d31; color: #fff; border: none; border-radius: 0; margin-bottom: 0;}
+.ellipsis{overflow: hidden;white-space: nowrap;text-overflow:ellipsis;}
+.full-width {width: 100%;}
+.container-fluid, .container-fluid .row, .log-content, .navbar-header {height: 100%;}
+.navbar-brand {height: 0.8rem; padding: 0.12rem;}
+.logo-icon {width: 0.56rem; height: 0.56rem;}
+.nav-text {font-size: 0.22rem; font-weight: 700;}
+.user-icon {font-size: 0.22rem; color: #368848; border: 1px solid #368848; padding: 0.1rem; border-radius: 50%;}
+.logout-btn {display: block; width: 1.1rem; height: 0.45rem; border: 1px solid #368848; margin-left: 0.1rem; margin-top: 0.16rem; border-radius: 4px; color: white; line-height: 0.45rem; font-size: 0.15rem; text-align: center;}
+.navbar {background-color: #fff; border: none 0; margin-bottom: 0;}
+#navbar .tab-btn {color: #5e7b89; font-size: 0.18rem;}
+.search-box {border-bottom: 1px solid #c7cbce;}
+.search-content {padding-top:0.25rem; background-color: #edeef0; color: #627F8C;}
+.search-box .btn-default, .search-box .input-group input {border: 0; background-color: #edeef0; color: #627F8C;}
+.input-group .glyphicon-search {color: #33AA50;}
+.output-btn {display: block; padding: 0.06rem 0.12rem; color: #33AA50; font-size: 0.18rem;}
+.search-content .row,  .main-content .row {margin-bottom: 0.3rem;}
+#selectType {width: 100%; background-color: #edeef0; border: 1px solid #5cb85c;}
+.date-group {border: 1px solid #5cb85c; border-radius: 5px;}
+.date-group .time-input, .date-group .date-icon {background: #edeef0; border: 0;}
+.filter-btn, .add-btn{width: 100%; color: #fff; background-color: #5cb85c; border-color: #4cae4c;}
+.filter-btn:hover, .filter-btn:focus, .add-btn:hover, .add-btn:focus {color: #fff;}
+#searchOption:focus {background-color: #edeef0;}
+.search-box .change-option {min-width: 1.5rem;}
+.main-content {margin-top: 0.3rem;}
+.main-content .table th,#chargeHistory .table th,#UsageHistory .table th{border-bottom: 2px solid #33AA50; color: #627F8C;}
+.main-tbody {border-bottom: 2px solid #33AA50;}
+.page-btn {display: inline-block; width: 0.65rem; height: 0.28rem; margin-right: 0.1rem; border: 1px solid #368848; border-radius: 5px;}
+.page-input {height: 100%; border-radius: 8px; width: 0.38rem; float: left; text-align: center;}
+.forward-icon {color: #368848; font-size: 0.16rem; float: left; line-height: 0.26rem;}
+.page-icon {color: #368848; line-height: 0.26rem; font-size: 0.14rem;}
+#pageList {width: 0.62rem; height: 0.28rem; margin-left: 0.1rem; margin-right: 0.1rem; padding: 0; color: #fff; background-color: #4cae4c; border-radius: 4px;}
+#pageOption {min-width: 0.64rem; left: 0.1rem;}
+.show-user {position: absolute; right: -0.12rem; top: 0.24rem;}
+.user-info {position: relative; padding-right: 0.12rem;}
+.user-info .logout-menu {min-width: 0.88rem; top: 80%;}
+.show-name {font-size: 16px; display: inline-block; max-width: 2.35rem;}
+.page-num-area {line-height: 0.28rem;}
+.opt-btn {color: #5cb85c; cursor: pointer;}
+.add-date {border: 0!important; background: #fff!important;}
+.input-border {border: 1px solid #c7cbce; border-radius: 5px;margin-top: 10px;}
+/*#myModal .modal-save-btn {text-align: center;}*/
+.modal-save-btn .btn-success{width: 20%;}
+.addDate-icon {background: #fff; height: 32px;}
+#myModal .modal-dialog, #assignModal .modal-dialog, #errorModal .modal-dialog, #addImageModal .modal-dialog,#addTimeModal .modal-dialog{margin-top: 150px;}
+.modal-footer {text-align: center; border: 0;}
+.modal-header {border: 0;}
+#assignName {margin-top: 0.1rem;}
+#imageForm .select-platform{
+    margin-right: 20px;
+    vertical-align: middle;
+}
+#errorInfo{
+    font-size:16px;
+}
+
+#receiverModal .modal-body{
+    font-size:16px;
+}
+#receiverModal .modal-body span{
+    display: inline-block;
+    margin:10px 0; 
+    margin-left:20px;
+    font-size:14px;
+}
+.showRid{
+    cursor: pointer;
+}
+td .remove{
+    margin-left: 15px;
+    border: 1px solid #5cb85c;
+    color: #5cb85c;
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#close_nav{
+    z-index: 60;
+}
+#pro_nav_icon_bg{
+    top:80px!important;
+}
+.showDetail{
+    width: 61px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(92,184,91,1);
+    line-height: 14px;
+    background-color: transparent;
+    margin-left: 20px;
+}
+table .t_body{
+    border-top: 2px solid #33AA50;
+    border-bottom: 2px solid #33AA50;
+}
+#searchDetial thead>tr>th {
+    border-bottom: 2px solid #33AA50;
+}
+#searchDetial .user-email{
+    font-size:20px;
+    font-weight:500;
+    color:rgba(102,102,102,1);
+    line-height:24px;
+    padding-bottom: 20px;
+}
+

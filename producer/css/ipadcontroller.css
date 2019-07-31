@@ -1,0 +1,312 @@
+/*暂时添加上*/
+.item img{
+    width:100%;
+    background-color: #fff;
+}
+@media screen and (min-width: 1200px) {
+    html,body{
+        max-width:1200px;
+        margin:0 auto;
+        touch-action: none;
+    }
+}
+html,body{
+    height: 100%; 
+    touch-action: none;
+    -webkit-user-select: none;
+}
+body{
+    padding:24px 32px;
+    background-color:rgba(17,18,19,1);
+}
+.icon-erphone:before{content:"\e63f";}
+.container{
+    height:100%;
+}
+.sourse-ls{
+    width:calc(100% - 343px);
+    padding-right: 21px;
+    height:100%;
+}
+.sourse-ls .header{
+    height: 58px;
+    width: 100%;
+    padding-bottom: 28px;
+}
+.sourse-ls .sour-body{
+    width: 100%;
+    height:calc(100% - 58px);
+}
+.sour-body .sour-ls{
+    width:100%;
+    height: 100%;
+}
+.sour-body .sour-ls .single-sour{
+    float: left;
+    width: 96px;
+    height: 100%;
+    margin-right: 4px;
+}
+.single-sour video{
+    width:100%;
+}
+.sour-body .sour-ls .single-sour:last-child{
+    margin-right: 0px!important;
+}
+.sour-ls .sour-box{
+    width:100%;
+    height:54px;
+    margin-bottom:78px;
+    /*border: 2px solid #000;*/
+}
+.sour-ls .sour-audio{
+    height:calc(100% - 132px);
+}
+.sour-ls .a-volume{
+    width:100%;
+    height:calc(100% - 194px);
+}
+.main-fn{
+    width:342px;
+    padding-left:22px;
+    height:100%;
+}
+.main-fn .main-v{
+    width:100%;
+    margin-bottom: 12px;
+}
+.main-fn .main-body{
+    margin:0 32px;
+    height:calc(100% - 192px);
+}
+.main-fn .main-audio{
+    height:100%;
+}
+.main-fn .pvw-audio,.main-fn .pgm-audio{
+    width:96px;
+    height:100%;
+}
+.main-fn .pvw-audio{
+    float: left;
+}
+.main-fn .pgm-audio{
+    float: right;
+}
+.main-fn .v-title,.sour-ls .v-title{
+    text-align: center;
+    font-size:16px;
+    height: 22px;
+    line-height: 22px;
+    margin-bottom: 8px;
+}
+.main-fn .audio-body,.sour-ls .audio-body{
+    width:100%;
+    background:rgba(28,28,29,1);
+    border-radius:4px;
+    height:calc(100% - 30px);
+    padding:0 16px;
+}
+.solid{
+    width:1px;
+    background-color:rgba(255,255,255,0.1);
+    height:calc(100% - 80px);
+    margin:40px 0;
+}
+.scale {
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    position: relative;
+    background-color: #fff;
+}
+.scale video{
+    width:100%;
+}
+.a-monitor{
+    text-align: center;
+}
+.a-monitor .erphone{
+    height: 74px;
+    line-height: 74px;
+    font-size: 24px;
+}
+.a-track{
+    padding-top:8px;
+    width:64px;
+    height:30px;
+    margin-bottom: 26px;
+}
+.main-fn .a-volume{
+    width:100%;
+    height:calc(100% - 194px);
+}
+.a-control{
+    text-align: center;
+    padding:16px 0 24px;
+}
+.a-control button{
+    width:56px;
+    height:24px;
+    background:linear-gradient(128deg,rgba(112,112,112,1) 0%,rgba(75,75,75,1) 100%);
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+    border-radius:13px;
+    outline: none;
+    border: 0;
+    color:#fff;
+}
+.a-control button.active{
+    background:linear-gradient(128deg,rgba(235,108,108,1) 0%,rgba(231,55,55,1) 100%);
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.5);
+
+}
+.audio-body .icon-erphone.disabled{
+    display: none;
+} 
+.vol-size{
+    font-size: 16px;
+    display: none;
+}
+.erphone .icon-erphone{
+    color:rgba(255,255,255,0.2);
+}
+.erphone .icon-erphone.active{
+    color:rgba(255,255,255,1);
+}
+.a-volume .vol-control{
+    width:22px;
+    height:100%;
+    margin-right: 6px;
+    width:6px;
+    background:rgba(61,63,64,1);
+    border-radius:4px;
+    margin:0 14px 0 8px;
+}
+.a-volume .vol-show{
+    width:36px;
+    height:100%;
+}
+.ui-slider-vertical .ui-slider-handle{
+    left:-9px;
+    outline: none;
+}
+.audio {
+    height:100%;
+}
+.audio .bg{
+    width:4px;
+    height:100%;
+    background: url("../images/volbar.png");
+    border-radius:3px;
+    background-size: 100% 100%;
+}
+.audio .row{
+    height:100%;
+}
+.audio .row:first-child{
+    margin-right: 2px;
+}
+.audio .active{
+    border-top-left-radius: 3px; 
+    border-top-right-radius: 3px;
+    height:36%;
+    background-color: rgba(61,63,64,1);
+}
+.vol-show .vol-mark{
+    height:100%;
+}
+.vol-mark li{
+    /*height:25%;*/
+    font-size:12px;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:17px;
+    width:26px;
+    text-align: right;
+}
+.vol-mark .vol-mark-first{
+    height:50%;
+}
+.vol-mark .vol-mark-secord{
+    height:25%;
+}
+.vol-mark .vol-mark-third{
+    height:15%;
+}
+.vol-mark .vol-mark-fourth{
+    height:10%;
+}
+.vol-mark .master-first{
+    height:25%;
+}
+.vol-mark .master-secord{
+    height:30%;
+}
+.vol-mark .master-third{
+    height:20%;
+}
+.vol-mark .master-fourth{
+    height:15%;
+}
+.vol-mark .master-fifth{
+    height:10%;
+}
+.vol-mark li:last-child{
+    /*height:25%;*/
+    position: relative;
+}
+.vol-mark li:last-child div{
+    position: absolute;
+    width:26px;
+    bottom:-6px;
+    left:0;
+}
+
+/* item 用来放置全部的子元素 */
+/*afv start*/
+.afv-cut{
+    float: right;
+    border-radius: 4px;
+    text-align: center;
+    font-size:16px;
+}
+.studio_operate{
+    margin-top:60px;
+}
+.afv-cut .afv-name{
+    display: inline-block;
+    width: 35px;
+    vertical-align: middle;
+    line-height: 15px;
+    font-size:16px;
+}
+.afv-cut .afv-font,.studio_operate .studio-font{
+    position: relative;
+    vertical-align: middle;
+    overflow: hidden;
+    margin-left:3px;
+    width:32px;
+    border-radius: 10px;
+    height:20px;
+    display: inline-block;
+    margin-right: 7px;
+    background-color: #44DB5E;
+}
+.afv-font .radius-box,.studio_operate .studio-box{
+    position: absolute;
+    left:11px;
+    top:0px;
+    display: inline-block;
+    width:32px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #999;
+}
+.afv-font .radius-box .switch-radius,.studio_operate .studio-box .switch-radius{
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+/*afv end*/

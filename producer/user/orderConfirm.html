@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Producer Payment</title>
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta id="i18n_pagename" content="index">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+    <link rel="icon" href="../favicon.ico"  type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../css/common/init.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common/class.common.css"/>
+    <link rel="stylesheet" href="../css/register.css?version=51">
+</head>
+<body> 
+	<div class="header">
+        <div class="logo"><img src="../images/logo.png" alt=""></div>
+        <div class="header-title">TVU Producer</div>
+    </div>
+	 <div class="order-confirm-box">
+        <div class="order-confirm">
+            <p><span class="i18n YourOrder" name="i18n_YourOrder">Your order is processing. This should take about 5 seconds and the page would automatically refresh when complete.</span>
+                <img src="../images/cloud_loading.gif" alt="">
+            </p>
+            <p><span class="i18n" name="i18n_SupportQuestion" style="font-size:14px;">If you have any questions, please contact TVU support at:</span>
+            <span class="questionTips">Support@tvunetworks.com</span></p>
+        </div>
+    </div>
+    <script src="../js/utils/jquery.min.js"></script>
+    <script src="../js/utils/fastclick.js"></script>
+    <script src="../js/utils/i18n_switchLanguage.js"></script>
+    <script src="../js/utils/jquery.i18n.properties.min.js"></script>
+    <script>
+    	clearInterval(orderstatus);
+		var orderstatus = setInterval(function(){ 
+			$.ajax({
+        		type: "POST",
+        		url:"../newCheckOrder",
+        		timeout:60000,
+        		success: function(data){
+					data = JSON.parse(data);
+					if(data.errorCode=="0x0"){
+						if(data.result==1){
+						 	clearInterval(orderstatus);
+						    var usersession=localStorage.getItem("session");
+						 	window.location.href="http://" + window.location.host + "/producerpro/user/paypalSuccess.html"; 
+						}
+					}
+				}
+        	})
+		},5000);
+    </script>
+</body>
+</html>

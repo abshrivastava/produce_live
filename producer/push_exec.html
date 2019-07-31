@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta id="i18n_pagename" content="index">
+    <title>Producer</title>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache">
+</head>
+<body>
+    <script>
+    var data = location.href,params={};
+    data = data.substring(data.indexOf("?")+1);
+    data.split('&').forEach(function (item) {  //js的forEach()方法
+         item = item.split('=');
+         params[decodeURIComponent(item[0])] = decodeURIComponent(item[1]);
+    });
+    if(params.usedFun == 'publish'){
+        parent.window.push_stream.pushAbout.showDetailPush(params);
+    }else{
+        parent.window.push_stream.pushAbout.selectPlatfrom(params);
+    }
+    </script>
+</body>
+</html>

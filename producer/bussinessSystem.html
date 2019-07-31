@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+        <meta id="i18n_pagename" content="index">
+        <title>Producer</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta http-equiv="expires" content="0">
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+        <!-- build:css ./style/init.css -->
+        <link rel="stylesheet" type="text/css" href="./css/common/init.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/class.common.css -->
+        <link rel="stylesheet" type="text/css" href="./css/common/class.common.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/css/page.common.css -->
+        <link rel="stylesheet" type="text/css" href="./css/common/page.common.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/popupAlert.css -->
+        <link rel="stylesheet" type="text/css" href="./css/popupAlert.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/animate.min.css -->
+        <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/producerPro.css -->
+        <link rel="stylesheet" type="text/css" href="./css/producerPro.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/index.css -->
+        <link rel="stylesheet" type="text/css" href="./css/index.css">
+        <!-- endbuild -->
+        <!-- build:css ./style/producerManage.css -->
+        <link rel="stylesheet" type="text/css" href="./css/bussinessSystem.css">
+        <!-- endbuild -->
+</head>
+<body>
+    <header class="clearFix header--fixed">
+        <div id="website_title" class="left clearFix">
+            <img src="images/logo_pageIcon.png" class="left" id="website_title_icon" />
+            <div class="left i18n" name="i18n_ProducerPro" id="website_title_text"></div>
+        </div>
+        <div id="website_user" class="right clearFix" style="display:none">
+            <a id="userAccountMenu" class="clearFix">
+                <div class="right downArrow arrow dropdownArrow" id="userAccountIcon_arrow"></div>
+                <div id="userAccountIcon" class="right"></div>
+            </a>
+            <ul id="user_operationList" class="hide">
+                <li class="user_operationList_item">
+                    <span id="user_info_name" class="ellipsis left"></span>
+                    <sapn class="businessType "></sapn>
+                </li>
+                <li class="user_operationList_item setlist">
+                    <p class="ellipsis set i18n" id="user_manager" name="i18n_UserManagement">User Management</p>
+                  <div class="i18n-language" id="changeLan">
+                        <div class="left language i18n" name="i18n_languageTrans">Language</div>
+                        <ul class="right">
+                            <li class="" data-id="en">En</li>
+                            <li class="" data-id="zh">中文</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="user_operationList_item">
+                    <a href="javascript:;" onclick="logout()" id="user_logout" class="left ellipsis i18n" name="i18n_logout">
+                    </a>
+                </li>
+            </ul>
+        </div> 
+    </header>
+    <div class="pattern-content center-block" >
+        <div class="pattern-all-content center-block clearFix">
+            <div class="pattern-left pattern">
+                <ul class="" style="float:left;"></ul> 
+            </div>
+            <div class="pattern-center pattern" data-type="1">
+                <ul class="" style="float:left;"></ul> 
+                
+            </div>
+            <div class="pattern-right pattern" data-type="0">
+                <ul class="" style="float:left;"></ul>     
+            </div>
+        </div>  
+        <div class="center-block nextBtn">Next</div>
+    </div>
+
+    <div class="price-content center-block" style="display: none;">
+        <div class="price-center center-block">
+            <div class="backPlan i18n" name="i18n_BackToPlan">< Back to choose plan</div>
+            <div class="userPatternInfo">
+                <div class="versionChoose">
+                    <span class="typeName">Professional</span>
+                    <span class="i18n" name="i18n_Package">Package</span>
+                </div>
+                <div class="userLastTime right">
+                    <div class="userRemainTime">
+                        <p class="i18n" name="i18n_RemainingTime">Time Remaining</p>
+                        <div>
+                            <span class="commonTimeLast">10h 00min</span> -> <span class="commonTimeAfter">10h 00min</span>
+                            <span class="iconfont icon-guanyuxinxitishijingshi"></span>
+                            <div class="timeTips">
+                               <p class="i18n" name="i18n_CleanTime">We will clean your free time after</p>
+                               <p class="i18n" name="i18n_puchasepack">purchasing package.</p> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="userExpirationDate">
+                        <p class="i18n" name="i18n_Expiration">Expiration Date</p>
+                        <div><span class="commonTimeLast">2018/12/12</span> -> <span class="commonTimeAfter">2018/12/12</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="price-list clearfix">
+                <ul></ul>   
+            </div>
+            <div class="userWhatToPay center-block">Use PAYPAL to pay</div>
+            <div id="bgFilters" style="z-index:2;"></div>
+        </div>
+        <div class="payqrimg">
+            <p class="clearFix"><span class="left i18n" name="i18n_WeChatPay">微信支付</span><span class="right close iconfont icon-close"></span></p>
+            <div class="pay-body">
+                <div class="left code-title">
+                    <div class="left"><img src="./images/scanscan.png" alt=""></div>
+                    <div class="right i18n ScanQr" name="i18n_ScanQr">请使用微信扫一扫 扫描二维码支付</div>
+                    <div id="payimg"></div>
+                </div>
+                <div class="right">
+                    <img src="./images/weixin_scan.png" alt="">
+                </div>
+            </div> 
+        </div>
+    </div>
+    <!-- build:js ./script/jquery.min.js -->
+    <script src="./js/utils/jquery.min.js"></script>
+    <script src="./js/utils/fastclick.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/helpers.min.js -->
+    <script src="./js/utils/helpers.js" type="text/javascript"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.i18n.properties.min.js -->
+    <script src="./js/utils/jquery.i18n.properties.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/i18n_switchLanguage.min.js -->
+    <script src="./js/utils/i18n_switchLanguage.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/fn.oUtils.min.js -->
+    <script src="./js/utils/fn.oUtils.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/headroom.min.js -->
+    <script src="./js/utils/headroom.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.headroom.min.js -->
+    <script src="./js/utils/jquery.headroom.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.nicescroll.min.js -->
+    <script src="./js/utils/jquery.nicescroll.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/in18_trans.js -->
+    <script src="./js/uncompress/i18n_trans.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/jquery.fn.common.min.js -->
+    <script src="./js/utils/jquery.fn.common.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ./script/index.js -->
+    <script src="./js/uncompress/index.js"></script>
+    <!-- endbuild -->
+    <!-- <script src="./js/uncompress/demo.js"></script> -->
+    <script src="./js/utils/qrcode.min.js"></script>
+    <!-- build:js ./script/producerManage.js -->
+    <script src="./js/uncompress/bussinessSystem.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

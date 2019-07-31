@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
+    <meta id="i18n_pagename" content="index">
+    <title>Producer</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./style/init-313beeb169.css">
+    <link rel="stylesheet" href="./style/class-c629d1a6e3.common.css">
+    <link rel="stylesheet" href="./style/css/page-8fe1d3325e.common.css">
+    <link rel="stylesheet" href="./style/popupAlert-2818e649d7.css">
+    <link rel="stylesheet" href="./style/animate-c6b9e3faa2.min.css">
+    <link rel="stylesheet" href="./style/producerPro-1394d72205.css">
+    <link rel="stylesheet" href="./style/index-967ec7ce4d.css">
+    <link rel="stylesheet" href="./style/producerManage-1d5d9c037f.css">
+
+</head>
+<body>
+    <header class="clearFix header--fixed">
+        <div id="website_title" class="left clearFix">
+            <img src="images/logo_pageIcon.png" class="left" id="website_title_icon" />
+            <div class="left i18n" name="i18n_ProducerPro" id="website_title_text"></div>
+        </div>
+        <!-- <nav id="website_nav" class="left clearFix"></nav>  -->
+             
+        <div id="hasNotReadMsgTip"></div>
+        
+        <div id="website_user" class="right clearFix">
+            <a id="userAccountMenu" class="clearFix">
+                <div class="right downArrow arrow dropdownArrow" id="userAccountIcon_arrow"></div>
+                <div id="userAccountIcon" class="right"></div>
+            </a>
+            <ul id="user_operationList" class="hide">
+                <li class="user_operationList_item">
+                    <span id="user_info_name" class="ellipsis left"></span>
+                    <sapn class="businessType"></sapn>
+                </li>
+                <li class="user_operationList_item setlist">
+                    <p class="ellipsis set i18n" id="user_manager" name="i18n_UserManagement">User Management</p>
+                    <!-- <p class="shareHasGift">分享有礼</p> -->
+                    <div class="i18n-language" id="changeLan">
+                        <div class="left language i18n" name="i18n_languageTrans">Language</div>
+                        <ul class="right">
+                            <li class="" data-id="en">En</li>
+                            <li class=""  data-id="zh">中文</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="user_operationList_item">
+                    <a href="javascript:;" onclick="logout()" id="user_logout" class="left ellipsis i18n" name="i18n_logout">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--i18n languageSelectBox-->
+        <!-- <div class="lan2 i18n-language-box">
+            <select id="switchLanguage">
+                <option value="en">English</option>
+                <option value="zh">中文简体</option>
+            </select>
+        </div> -->
+        <!--i18n select end-->
+    </header>
+    <div class="body">
+        <div class="content-area">
+            <div class="tab">
+                <h2 name="i18n_UserManagement" class="i18n">User Management</h2>
+                <ul class="select-tab">
+                    <!-- <li>Management</li>
+                    <li>Usage History</li>
+                    <li>Manage Subscription</li> -->
+                    <li class="active i18n" name="i18n_UsageHistory">Usage History</li>
+                    <li class="i18n" name="i18n_RecordManagement">Record Management</li>
+                </ul>
+            </div>
+            
+            <div class="content">
+                <ul class="content-tab">
+                    <!-- <li>12222</li>
+                    <li>22323</li>
+                    <li>32324</li> -->
+                    <li class="user-history">
+                            <h2 class="i18n" name="i18n_UsageHistory">Usage History</h2>
+                            <ul class="clearFix history-list">
+                                <li>
+                                    <!-- <div class="create-time left">
+                                        <p>May 12, 2018 14:00 ~ 15:00</p>
+                                        <p>- 2h 23min </p>
+                                        <p>Pro</p>
+                                    </div>
+                                    <div class="remain-time"><span>Remain</span> <span>- 2h 23min</span></div> -->
+                                </li>
+                            </ul>
+                            <div class="page">
+                                <div class="pre-page left"></div>
+                                <div class="page-content left"><span class="currentpage">2</span>/<span class="totalpage">5</span></div>
+                                <div class="next-page right"></div>
+                            </div>
+                        </li>
+                    <li class="download" style="display: none;">
+                        <h2 class="i18n" name="i18n_RecordManagement">Record Management</h2>
+                        <ul class="clearFix video-list">
+                            <!-- <li>
+                               <div class="time-about clearFix">
+                                    <div class="start-time left">2018.4.14 15:14:57</div> 
+                                    <div class="delete-time right">Auto delete after 19:12:14</div> 
+                               </div>
+                               <div class="pic-opt clearFix">
+                                    <div class="frontcover left">
+                                        <img src="./images/image.png" alt="">
+                                    </div>
+                                    <div class="operate right">
+                                        <a class="download-btn" href="http://ccimage.s3.amazonaws.com/test/TVUGrid.mp4" download="TVUGrid.mp">
+                                            <span class="iconfont icon-download"></span>
+                                            <span>Download</span>
+                                        </a>
+                                    </div>
+                               </div>
+                            </li> -->
+                        </ul>
+                        <div class="page">
+                            <div class="pre-page left"></div>
+                            <div class="page-content left"><span class="currentpage">2</span>/<span class="totalpage">5</span></div>
+                            <div class="next-page right"></div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="foot"></div>
+    <div class="tip-download">
+        <h2>HOW TO DOWNLOAD</h2>
+        <p>1. Right-click on Download button</p>
+        <p>2. Select "Save Link As…".</p>
+        <div class="tip_img">
+            <img src="./images/download_tips_en.png" alt="">
+        </div>
+        <p>3. Then save the record video to your computer.</p>
+        <div class="confirm-btn">
+            OK
+        </div>
+    </div>
+<script src="./script/jquery-364e213d4e.min.js"></script>
+<script src="./script/helpers-a7abcf5b91.min.js"></script>
+<script src="./script/jquery-9ff17fb97e.i18n.properties.min.js"></script>
+<script src="./script/i18n_switchLanguage-2d442cca39.min.js"></script>
+<script src="./script/fn-76244f3b9b.oUtils.min.js"></script>
+<script src="./script/headroom-68093d440e.min.js"></script>
+<script src="./script/jquery-3155bc32a3.headroom.min.js"></script>
+<script src="./script/jquery-27e81a3f7b.nicescroll.min.js"></script>
+<script src="./script/in18_trans-e6725fea66.js"></script>
+<script src="./script/jquery-fff2e1720f.fn.common.min.js"></script>
+<script src="./script/index-54d9815d30.js"></script>
+
+<script src="./script/producerManage-771b4c7b01.js"></script>
+
+</body>
+</html>

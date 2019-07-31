@@ -1,0 +1,785 @@
+input,textarea {outline: none;  -webkit-appearance: none;}
+input[type="button"],
+input[type="text"],
+input[type="password"],
+button { -webkit-appearance: none;}
+body{
+font-family: gotham, verdana;
+}
+a{text-decoration: none;}
+.i18n-language-box{float: right;line-height: 80px;padding-top: -5px;padding-right: 30px;}
+#switchLanguage{background: #424242;border: none;color: #fff;border-radius: 4px;height: 28px;line-height: 28px;width: 75px;}
+.font-bolder{font-weight:bolder;}
+.header{
+    width:100%;
+    height:0.8rem;
+    background-color: #33AB4F;
+    padding-left:0.1rem;
+    color:#fff;
+}
+.header .logo{
+    float: left;
+    padding-top: 0.1rem;
+    width:0.6rem;
+    vertical-align: middle;
+}
+.header .header-title{
+    height: 0.8rem;
+    line-height: 0.8rem;
+    padding-left: 0.25rem;
+    font-size: 0.2rem;
+    color:#fff;
+    float: left;
+}
+/*#website_user{position: relative;margin-right: 0.5rem;height: 0.36rem;margin-top: 0.2rem;width: 0.96rem;}
+#userAccountMenu{width: 100%;display: block;}
+#user_info_name{width: 100%;}
+#mainPage{border: 0;width: 19.2rem;height: 100%;}
+#userAccountIcon{width: 0.4rem;height:0.36rem;background-image:url(../images/website_user_icons.png);background-position: 0 -4px;background-repeat: no-repeat;}
+.active#userAccountMenu #userAccountIcon,#userAccountMenu:hover #userAccountIcon{background-position-y: -48px;}
+.active#userAccountMenu #userAccountIcon_arrow,#userAccountMenu:hover #userAccountIcon_arrow{border-top-color: #252525;}
+#user_logout{width: 100%;}
+#user_logout:hover{color: #39aa50;}
+#user_operationList{position: absolute;left:-67%;top: 175%;background-color: #252525;box-shadow: 0 0 10px #000;font-size: 0.12rem;color: #fff;width: 1.7rem;border-radius: 4px;}
+#userAccountIcon_arrow{margin-top: 0.16rem;margin-left: 0.1rem;}
+.user_operationList_item{height: 0.36rem;line-height: 0.36rem;}
+.user_operationList_item a{padding-left: 15px;}
+.user_operationList_item a:hover{color: #39aa50;}
+.user_operationList_item:nth-child(1),.user_operationList_item:nth-child(2){border-bottom: 1px solid #444;}*/
+/*.user_operationList_item:nth-child(2){border-bottom: 1px solid #444;}*/
+.register-body{
+    padding-top:0.8rem;
+    margin: 112px auto;
+    width: 480px;
+	height: 605px;
+    box-shadow: 0px 2px 9px 0px rgba(81,81,81,0.34);
+    border-radius: 4px;
+}
+/*.register-body{
+    padding-top:0.4rem;
+}*/
+.register-body p{
+    width:69px;
+    height:17px; 
+    font-size:14px;
+    font-family:Helvetica;
+    color:rgba(153,153,153,1);
+    line-height:17px;
+}
+.register-body .user{
+    margin: 0px 0.7rem;
+    width:80%;
+    height:0.4rem;
+    padding:0 5%;
+    margin-bottom: 0.5rem;
+}
+.register-body .user p{
+    width:170px;
+    height:17px; 
+    font-size:14px;
+    color:rgba(153,153,153,1);
+    line-height:17px;
+}
+
+.register-body .user input{
+    border: 1px solid #EBEBEB;
+    width: 280px;
+    height: 100%;
+    font-size: 0.2rem;
+    font-family:gothamMedium,verdana;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-color: rgba(196,196,196,1);
+}
+.register-body .emailCode{
+    position: relative;
+}
+.register-body .emailCode span{
+    font-size: 16px;
+    color: rgba(51,171,79,1);
+    position: absolute;
+    right: 90px;
+    bottom: -8px;
+    cursor: pointer;
+}
+.register-body .user-register button{
+    width:280px;
+    height:52px; 
+    background:rgba(51,171,79,1);
+    border-radius: 27px ; 
+    font-size: 20px;
+    color:rgba(255,255,255,1);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.register-body .user-register{
+    border-radius: 4px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    margin:0 10%;
+    margin-bottom:0.5rem;
+}
+.register-body .userSignInfo span{
+    /*margin-left: 30px;*/
+    font-size: 14px;
+    color: rgba(102,102,102,1);
+    margin-right: 10px;
+}
+.register-body .registerSign{
+    cursor: pointer;
+}
+.register-body .userSignInfo{
+    text-align: center;
+    margin:0 10%;
+}
+.register-body .userSignInfo a{
+    font-size:14px;
+    font-family:gothamMedium,verdana;
+    color:rgba(51,171,79,1);
+    text-decoration: none;
+}
+    
+.register-body .email .email-title,.register-body .phone .email-title,.register-body .password .password-title,.register-body .username .username-title,.register-body .confirm .confirm-title,.emailCode .code-title{
+    color:red;
+}
+/*.register-body .password input{
+    background: #fff;
+    background-image:url('../images/password.png'); 
+    background-repeat:no-repeat; 
+    background-position: 0.1rem 0.1rem;
+}
+.register-body .email input{
+    background-image:url('../images/email.png'); 
+    background-repeat:no-repeat; 
+    background-position: 0.1rem 0.1rem;
+}
+.register-body .company input{
+    background-image:url('../images/company.png'); 
+    background-repeat:no-repeat; 
+    background-position: 0.1rem 0.1rem;
+}
+.register-body .username input{
+    background-image:url('../images/username.png'); 
+    background-repeat:no-repeat; 
+    background-position: 0.1rem 0.1rem; 
+}
+.register-body .phone input{
+    background-image:url('../images/phone.png'); 
+    background-repeat:no-repeat; 
+    background-position: 0.1rem 0.1rem;
+}*/
+.register-success{    
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(117,117,117,0.5);
+}
+.success-load{
+    position: absolute;
+    width:80%;
+    height:1.5rem;
+    background-color: #fff;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    text-align: center;
+    padding-top:0.35rem;
+    border-radius: 4px;
+}
+.success-load img{
+    width:0.3rem;
+}
+.success-load div{
+    padding-top:0.1rem;
+    font-size:0.2rem;
+}
+.success-load-big{
+    padding-top:136px;
+    width:100%;
+    height:100%;
+}
+.success-load-big .success-img{
+    text-align: center;
+}
+.success-load-big .success-welcome{
+    padding-top:50px; 
+    font-size:20px;
+    color:rgba(51,51,51,1);
+    line-height:24px;
+    text-align: center;
+}
+.success-load-big .redirect{
+    padding-top:16px;
+    font-size:14px;
+    color:rgba(51,51,51,1);
+    line-height:17px;
+    text-align: center;
+}
+.success-load-big .redirect a{
+    color:#33AB4F;
+    text-decoration:none;
+}
+.success-load-big .success-title{
+    margin-top:32px;
+    text-align: center;
+    font-size:14px;
+    color:rgba(170,170,170,1);
+    line-height:17px;
+}
+.success-load-big .success-title p{
+    padding-bottom: 5px;
+}
+.redirect .seconds{
+    font-size:20px;
+}
+/* 欢迎页面 */
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.welcome{
+    background: url(../images/Mask.png) no-repeat;
+    background-size: cover;
+}
+.welcome .logo{
+    padding-top:40px;
+    padding-left:128px;
+    height:40px;
+    line-height:40px;
+    font-size:24px;
+}
+.welcome .logo img{
+    float: left;
+    width:40px;
+    margin-right:27px;
+}
+.welcome .logo span{
+    float: left;
+    font-size: 24px;
+    color:rgba(255,255,255,1);
+}
+.welcome .sign{
+    padding-right:128px;
+    margin-top: 50px;
+}
+.welcome .sign .login,.welcome .register{
+    float: right;
+    padding-top:10px;
+    font-size:16px;
+    margin-right:40px;
+}
+.welcome .sign .free{
+    float: right;
+    width:110px;
+    height:34px; 
+    background:rgba(246,177,60,1);
+    box-shadow: 0px 1px 4px 0px rgba(246,177,60,0.8), 0px 2px 8px 0px rgba(0,0,0,0.32);
+    border-radius: 51px; 
+    line-height: 32px;
+    text-align: center;
+    font-size:16px;
+    color:rgba(255,255,255,1);
+}
+.welcome .t-body .title{
+    font-size:48px;
+    color:rgba(255,255,255,1);
+    line-height:58px;
+    padding-top:180px;
+}
+.welcome .t-body .free{
+    margin-top:142px;
+    width:240px;
+    height:72px; 
+    background:rgba(246,177,60,1);
+    box-shadow: 0px 1px 4px 0px rgba(246,177,60,0.8), 0px 2px 8px 0px rgba(0,0,0,0.32);
+    border-radius: 51px ; 
+    text-align: center;
+    line-height: 72px;
+    font-size:32px;
+}
+.welcome .t-body{
+    padding:60px 0 0 128px;
+}
+.welcome .sign a,.welcome .t-body .free a{
+    text-decoration: none;
+}
+/* 欢迎页面结束 */
+.purchase .load,.purchase-cn .load{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.load .loading{
+    width: 80px;
+    height: 40px;
+    margin-left: 40%;
+    margin-top: 65%;
+}
+.load .loading span{
+    display: inline-block;
+    width: 8px;
+    height: 100%;
+    border-radius: 4px;
+    background: lightgreen;
+    -webkit-animation: load 1s ease infinite;
+}
+@-webkit-keyframes load{
+    0%,100%{
+        height: 40px;
+        background: lightgreen;
+    }
+    50%{
+        height: 70px;
+        margin: -15px 0;
+        background: lightblue;
+    }
+}
+.load .loading span:nth-child(2){
+    -webkit-animation-delay:0.2s;
+}
+.load .loading span:nth-child(3){
+    -webkit-animation-delay:0.4s;
+}
+.load .loading span:nth-child(4){
+    -webkit-animation-delay:0.6s;
+}
+.load .loading span:nth-child(5){
+    -webkit-animation-delay:0.8s;
+}
+.purchase,.purchase-cn{
+    padding-top:0.3rem;
+    margin: 112px auto;
+    width: 480px;
+    height:670px;
+    box-shadow: 0px 2px 9px 0px rgba(81,81,81,0.34);
+    border-radius: 4px;
+    position: relative;
+}
+.purchase-cn{
+    height:600px;
+}
+.purchase-cn .jump{
+    font-size:14px;
+    text-align: center;
+    padding-top:20px; 
+}
+.purchase-cn .jump button{
+    border: none;
+    outline: none;
+    color:rgba(51,171,79,1);
+    background-color:transparent;
+}
+.purchase .purchase-title,.purchase-cn .purchase-title{
+    margin-left: 0.4rem;
+    font-size:24px;
+    color:rgba(51,51,51,1);
+    font-weight: bold;
+}
+.purchase-cn .purchase-title{
+    margin-left: 0.3rem;
+}
+.purchase .userInfo,.purchase-cn .userInfo{
+    margin: 0.15rem 0.45rem;
+    font-size: 14px;
+}
+.purchase-cn .userInfo{
+    margin: 0.15rem 0.35rem;
+}
+.purchase-cn .purchaseInfo li span{
+    font-size: 14px;
+}
+.purchase-cn  .purchaseInfo{
+    border-bottom: 1px solid rgba(239,239,239,1);
+    padding-bottom: 15px;
+}
+.purchase-cn .discount{
+    margin:0 0.45rem;
+    padding-top: 15px;
+    font-size:14px;
+    color:rgba(102,102,102,1); 
+}
+.purchase-cn .discount .del-money{
+    color:rgba(251,159,86,1);
+}
+.purchase-cn .to-pay{
+    margin:0 0.45rem;
+    padding-top: 15px;
+    font-size:14px;
+}
+.purchase-cn .terms{
+    text-align: center;
+}
+.purchase-cn .to-pay button{
+    width:100%;
+    border: none;
+    outline: none;
+    height:40px;
+    background:rgba(51,171,79,1);
+    border-radius:20px;
+    color:#fff;
+    cursor: pointer;
+}
+.purchase .userInfo p,.purchase-cn .userInfo p{
+    color: #545454;
+}
+.money{
+    margin: 0.3rem auto;
+    width: 222px;
+    height: 64px;
+    font-size: 20px;
+    font-family: gothamMedium,verdana;
+    color: #666;
+    line-height:50px;
+}
+.money span:nth-child(2){
+    font-size: 58px;
+    color: #33AB4F;
+    font-weight: bold;
+}
+.purchaseInfo{
+    margin:0 0.45rem;
+}
+.purchaseInfo p{
+    font-size:14px;
+    color:rgba(51,171,79,1);
+    font-weight: bold;
+}
+.purchaseInfo ul{
+    margin-top: 10px;
+}
+.purchaseInfo li{
+    margin-bottom: 5px;
+    font-size:14px;
+    color:rgba(102,102,102,1);
+}
+.purchaseInfo li span{
+    padding-left: 15px;
+    font-size: 15px;
+}
+.purchaseInfo li:nth-child(1){
+    line-height: 24px;
+}
+.purchaseInfo li:nth-child(4){
+    line-height: 24px;
+}
+.payment{
+    font-size: 15px;
+    color: rgba(102,102,102,1);
+    margin-left: 0.45rem;
+    margin-top: 20px;
+}
+.paypal{
+    width: 400px;
+    height: 72px;
+    margin: 10px 0.45rem;
+    box-shadow: 0px 2px 9px 0px rgba(81,81,81,0.34);
+    cursor: pointer;
+}
+.paypal img:nth-child(1){
+    margin-left: 16px;
+    margin-top: 18px;
+}
+.paypal img:nth-child(2){
+    margin-left: 228px;
+    margin-top: 18px;
+}
+.terms{
+    margin: 0.2rem 0.45rem;
+    width: 400px;
+    font-size: 12px;
+    color: rgba(153,153,153,1);
+    line-height: 20px;
+}
+.terms span{
+    color: #33AB4F;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.email-verify{
+    width:480px;
+    height:400px;
+    padding-top: 0.05rem;
+}
+.rule{
+    position: absolute;
+    top: 115px;
+    left: -58px;
+    width: 595px;
+    background: rgba(255,255,255,1);
+    box-shadow: 0px 2px 9px 0px rgba(81,81,81,0.34);
+    border-radius: 4px;
+    padding-bottom: 20px;
+}
+.rule p{
+    font-size:14px;
+    color:#666666;
+    line-height:29px;
+    margin: 13px 0.4rem;
+}
+.rule p:nth-child(1){
+    font-size:24px;
+    color:rgba(84,84,84,1);
+}
+.rule p:nth-child(5) span{
+    color: #33AB4F;
+}
+.rule div{
+    width: 160px;
+    height: 52px;
+    background: rgba(51,171,79,1);
+    border-radius: 26px;
+    margin: 0.01rem 2rem;
+    font-size: 20px;
+    line-height: 52px;
+    text-align: center;
+    color: #fff; 
+    cursor: pointer;
+}
+.order-confirm,.order-confirm-fail{
+    margin: 170px auto;
+    border-radius: 4px;
+    width:600px;
+    height: 100px;
+    font-size: 20px;
+    color: rgba(102,102,102,1);
+    line-height: 30px;
+}
+.order-confirm p:nth-child(1),.order-confirm-fail p:nth-child(1){
+    position: relative;
+    margin-bottom: 10px;
+}
+.order-confirm p:nth-child(1) img{
+    position: absolute;
+    left: -66px;
+    top: 6px;
+}
+.order-confirm p:nth-child(2){
+    height: 14px;
+    font-size: 14px;
+    color: rgba(102,102,102,1);
+    line-height: 17px;
+    float: left;
+}
+.order-confirm  .questionTips{
+    color: #33AB4F;
+    font-size: 14px;
+    margin-top: -6px;
+}
+.order-confirm-fail span:nth-child(1){
+    color: rgba(102,102,102,1);
+    font-size: 14px;
+    margin-top: -6px;
+}
+.order-confirm-fail .supportEmail{
+    color: #33AB4F;
+}
+.order-confirm-fail{
+   height: 130px;
+   text-align: center;
+}
+.order-confirm-fail div{
+    width:280px;
+    height:52px; 
+    background:rgba(51,171,79,1);
+    border-radius: 27px ;
+    margin:47px 147px;
+    color: #FFF;
+    line-height: 52px;
+    cursor: pointer;
+}
+/*.email-verify .verify-title{
+    width: 280px;
+    height: 72px;
+    font-size: 18px;
+    color: rgba(102,102,102,1);
+    line-height: 24px;
+    margin-top: 56px;
+    margin-left: 100px;
+}
+
+.emailCode{
+    margin: 39px 100px;
+}
+.emailCode p{
+    font-size:14px;
+    color:rgba(153,153,153,1);
+    margin-bottom: 15px;
+}
+.emailCode .code-title{
+    
+}*/
+
+@media screen and (max-width: 700px){
+    .register-body{
+        width:100%;
+        padding-top: 0rem;
+        box-shadow: none;
+        border-radius: 0px;
+        margin: 82px auto;
+    }
+    .register-body .user{
+        margin: 0px 10%;
+        width:80%;
+        height:0.4rem;
+        padding:0 5%;
+        margin-bottom: 0.3rem;
+    }
+    .register-body .emailCode span{
+        right: 10%;
+    }
+    .register-body .user input{
+        width:100%;
+    }
+   .register-body .user-register button{
+        width: 2rem;
+   }
+   .register-body .userSignInfo span{
+        font-size:12px;
+   }
+   .purchase-cn .purchaseInfo{
+        margin: 0 8%;
+   }
+   .purchase-cn{
+        width:100%;
+        box-shadow:none;
+        padding-top:0;
+        margin: 20px auto;
+   }
+   .terms{
+        margin: 0.2rem 0;
+        width: 100%;
+   }
+   .purchase-cn .jump{
+        display: none;
+   }
+   .rule{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom:0;
+        right:0;
+        margin:auto;
+        width:90%;
+        background: rgba(255,255,255,1);
+        box-shadow: 0px 2px 9px 0px rgba(81,81,81,0.34);
+        border-radius: 4px;
+    }
+    .rule p{
+        font-size:14px;
+        color:#666666;
+        line-height:29px;
+        margin: 13px 0.4rem;
+    }
+    .rule p:nth-child(1){
+        font-size:24px;
+        color:rgba(84,84,84,1);
+    }
+    .rule p:nth-child(5) span{
+        color: #33AB4F;
+    }
+    .rule div{
+        margin: 10px auto;
+        height:40px;
+        line-height: 40px;
+    }
+}
+/* weixin pay*/
+.payqrimg{
+    width:600px;
+    height:416px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 2px 8px 0px rgba(81,81,81,0.34);
+    border-radius:4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    padding:24px 40px;
+    display: none;
+}
+.payqrimg p .left{
+    font-size: 24px;
+}
+.payqrimg .pay-body{
+    margin-top:34px;
+    padding-left:36px;
+    padding-right:36px; 
+}
+.pay-body .code-title{
+    width:200px;
+}
+.pay-body .code-title img{
+    width: 40px;
+    margin-top: 5px;
+    margin-right:10px;
+}
+.pay-body .code-title .right{
+    width:144px;
+    font-size:18px;
+}
+#payimg{
+    margin-top:10px;
+    float: left;
+    width: 200px;
+    height: 200px;
+    border:1px solid rgba(239,239,239,1);
+    padding: 20px;
+}
+#payimg img{
+    width: 160px;
+    height: 160px;
+}
+.payqrimg .close{
+    font-size: 20px;
+}
+.payMobile{
+    background: rgba(255,255,255,1);
+    box-shadow: 0px 2px 8px 0px rgba(81,81,81,0.34);
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 90%;
+    display: none;
+    margin: 170px 5%;
+    padding: 24px 40px;
+}
+.payMobile p .left{
+    font-size: 24px;
+}
+.payMobile .close{
+    font-size: 20px;
+}
+.payMobile .code-title{
+    margin-top:20px;
+    height:48px;
+}
+.payMobile .code-title .right{
+    line-height: 48px;
+}
+#phonepayimg{
+    width: 200px;
+    height: 200px;
+    border:1px solid rgba(239,239,239,1);
+    padding: 20px;
+    margin:0 auto;
+    margin-top:10px;
+}
